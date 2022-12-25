@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/18 00:36:51 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/25 15:11:44 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #define VECTOR_HPP
 
 #include <cstddef>
+#include <iterator>
 #include <stdexcept>
+#include "Vector_Iterator.hpp"
 
 namespace ft
 {
@@ -41,6 +43,10 @@ namespace ft
 			size_t	size() const;
 			size_t	capacity() const;
 			bool	empty() const;
+
+			typedef typename ft::VectorIterator<T> iterator;
+			iterator	begin() { return (iterator(_data)); };
+			iterator	end() { return (iterator(_data + _size)); };
 	};
 
 	/*======|=============|======*/
