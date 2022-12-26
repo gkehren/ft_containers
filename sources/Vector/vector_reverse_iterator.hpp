@@ -1,57 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Vector_Reverse_Iterator.hpp                        :+:      :+:    :+:   */
+/*   vector_reverse_iterator.hpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 00:33:03 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/26 01:12:49 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/26 16:22:54 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_REVERSE_ITERATOR
 #define VECTOR_REVERSE_ITERATOR
 
-#include "Vector_Iterator.hpp"
-#include "Vector.hpp"
+#include "vector_iterator.hpp"
+#include "vector.hpp"
 
 namespace ft
 {
 	template<typename T>
-	class VectorReverseIterator
+	class vectorreverseiterator
 	{
 		private:
 			T*	_ptr;
 
 		public:
-			VectorReverseIterator() {};
-			VectorReverseIterator(T* ptr) : _ptr(ptr) {};
-			VectorReverseIterator(VectorReverseIterator const &other) { *this = other; };
+			vectorreverseiterator() {};
+			vectorreverseiterator(T* ptr) : _ptr(ptr) {};
+			vectorreverseiterator(vectorreverseiterator const &other) { *this = other; };
 
-			virtual ~VectorReverseIterator() {};
+			virtual ~vectorreverseiterator() {};
 
-			VectorReverseIterator	operator++() {
+			vectorreverseiterator	operator++() {
 				_ptr--;
 				return(*this);
 			};
-			VectorReverseIterator	operator++(int) {
+			vectorreverseiterator	operator++(int) {
 				_ptr--;
-				return (VectorReverseIterator(_ptr + 1));
+				return (vectorreverseiterator(_ptr + 1));
 			};
-			VectorReverseIterator	operator--() {
+			vectorreverseiterator	operator--() {
 				_ptr++;
 				return (*this);
 			};
-			VectorReverseIterator	operator--(int) {
+			vectorreverseiterator	operator--(int) {
 				_ptr++;
-				return (VectorReverseIterator(_ptr - 1));
+				return (vectorreverseiterator(_ptr - 1));
 			};
 
-			bool	operator==(const VectorReverseIterator& other) const {
+			bool	operator==(const vectorreverseiterator& other) const {
 				return (_ptr == other._ptr);
 			};
-			bool	operator!=(const VectorReverseIterator& other) const {
+			bool	operator!=(const vectorreverseiterator& other) const {
 				return (_ptr != other._ptr);
 			};
 
@@ -65,31 +65,31 @@ namespace ft
 				return (*(_ptr + n));
 			};
 
-			VectorReverseIterator& operator+=(std::ptrdiff_t n) {
+			vectorreverseiterator& operator+=(std::ptrdiff_t n) {
 				_ptr -= n;
 				return (*this);
 			};
-			VectorReverseIterator& operator-=(std::ptrdiff_t n) {
+			vectorreverseiterator& operator-=(std::ptrdiff_t n) {
 				_ptr += n;
 				return (*this);
 			};
-			std::ptrdiff_t operator+(VectorReverseIterator other) {
+			std::ptrdiff_t operator+(vectorreverseiterator other) {
 				return (_ptr - other._ptr);
 			};
-			std::ptrdiff_t operator-(VectorReverseIterator other) {
+			std::ptrdiff_t operator-(vectorreverseiterator other) {
 				return (_ptr + other._ptr);
 			};
 
-			bool	operator<(const VectorReverseIterator& other) const {
+			bool	operator<(const vectorreverseiterator& other) const {
 				return (_ptr < other._ptr);
 			};
-			bool	operator>(const VectorReverseIterator& other) const {
+			bool	operator>(const vectorreverseiterator& other) const {
 				return (_ptr > other._ptr);
 			};
-			bool	operator<=(const VectorReverseIterator& other) const {
+			bool	operator<=(const vectorreverseiterator& other) const {
 				return (_ptr <= other._ptr);
 			};
-			bool	operator>=(const VectorReverseIterator& other) const {
+			bool	operator>=(const vectorreverseiterator& other) const {
 				return (_ptr >= other._ptr);
 			};
 	};

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Vector_Iterator.hpp                                :+:      :+:    :+:   */
+/*   vector_iterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:09:39 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/26 00:57:09 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/26 16:21:33 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,41 @@
 namespace ft
 {
 	template<typename T>
-	class VectorIterator
+	class vectoriterator
 	{
 		private:
 			T*	_ptr;
 
 		public:
-			VectorIterator() {};
-			VectorIterator(T* ptr) : _ptr(ptr) {};
-			VectorIterator(VectorIterator const &other) { *this = other; };
+			vectoriterator() {};
+			vectoriterator(T* ptr) : _ptr(ptr) {};
+			vectoriterator(vectoriterator const &other) { *this = other; };
 
-			virtual ~VectorIterator() {};
+			virtual ~vectoriterator() {};
 
-			VectorIterator	operator++(int) {
+			vectoriterator	operator++(int) {
 				_ptr++;
 				return(*this);
 			};
-			VectorIterator	operator++() {
-				VectorIterator tmp(*this);
+			vectoriterator	operator++() {
+				vectoriterator tmp(*this);
 				operator++();
 				return (tmp);
 			};
-			VectorIterator	operator--(int) {
+			vectoriterator	operator--(int) {
 				_ptr--;
 				return (*this);
 			};
-			VectorIterator	operator--() {
-				VectorIterator tmp(*this);
+			vectoriterator	operator--() {
+				vectoriterator tmp(*this);
 				operator--();
 				return (tmp);
 			};
 
-			bool	operator==(const VectorIterator& other) const {
+			bool	operator==(const vectoriterator& other) const {
 				return (_ptr == other._ptr);
 			};
-			bool	operator!=(const VectorIterator& other) const {
+			bool	operator!=(const vectoriterator& other) const {
 				return (_ptr != other._ptr);
 			};
 
@@ -64,37 +64,37 @@ namespace ft
 				return (*(_ptr + n));
 			};
 
-			VectorIterator& operator+=(std::ptrdiff_t n) {
+			vectoriterator& operator+=(std::ptrdiff_t n) {
 				_ptr += n;
 				return (*this);
 			};
-			VectorIterator& operator-=(std::ptrdiff_t n) {
+			vectoriterator& operator-=(std::ptrdiff_t n) {
 				_ptr -= n;
 				return (*this);
 			};
-			VectorIterator operator+(std::ptrdiff_t other) {
-				return(VectorIterator(_ptr + other));
+			vectoriterator operator+(std::ptrdiff_t other) {
+				return(vectoriterator(_ptr + other));
 			};
-			VectorIterator operator-(std::ptrdiff_t other) {
-				return(VectorIterator(_ptr - other));
+			vectoriterator operator-(std::ptrdiff_t other) {
+				return(vectoriterator(_ptr - other));
 			};
-			std::ptrdiff_t operator+(VectorIterator other) {
+			std::ptrdiff_t operator+(vectoriterator other) {
 				return (_ptr + other._ptr);
 			};
-			std::ptrdiff_t operator-(VectorIterator other) {
+			std::ptrdiff_t operator-(vectoriterator other) {
 				return (_ptr - other._ptr);
 			};
 
-			bool	operator<(const VectorIterator& other) const {
+			bool	operator<(const vectoriterator& other) const {
 				return (_ptr < other._ptr);
 			};
-			bool	operator>(const VectorIterator& other) const {
+			bool	operator>(const vectoriterator& other) const {
 				return (_ptr > other._ptr);
 			};
-			bool	operator<=(const VectorIterator& other) const {
+			bool	operator<=(const vectoriterator& other) const {
 				return (_ptr <= other._ptr);
 			};
-			bool	operator>=(const VectorIterator& other) const {
+			bool	operator>=(const vectoriterator& other) const {
 				return (_ptr >= other._ptr);
 			};
 	};
