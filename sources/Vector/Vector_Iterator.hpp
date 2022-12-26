@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:09:39 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/25 15:03:31 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/26 00:57:09 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,17 @@ namespace ft
 				_ptr -= n;
 				return (*this);
 			};
-			friend VectorIterator	operator+(VectorIterator lhs, std::ptrdiff_t rhs) {
-				lhs += rhs;
-				return (lhs);
+			VectorIterator operator+(std::ptrdiff_t other) {
+				return(VectorIterator(_ptr + other));
 			};
-			friend VectorIterator	operator+(std::ptrdiff_t lhs, VectorIterator rhs) {
-				return (rhs + lhs);
+			VectorIterator operator-(std::ptrdiff_t other) {
+				return(VectorIterator(_ptr - other));
 			};
-			friend VectorIterator	operator-(VectorIterator lhs, std::ptrdiff_t rhs) {
-				lhs -= rhs;
-				return (lhs);
+			std::ptrdiff_t operator+(VectorIterator other) {
+				return (_ptr + other._ptr);
 			};
-			friend std::ptrdiff_t	operator-(const VectorIterator& lhs, const VectorIterator& rhs) {
-				return (lhs._ptr - rhs._ptr);
+			std::ptrdiff_t operator-(VectorIterator other) {
+				return (_ptr - other._ptr);
 			};
 
 			bool	operator<(const VectorIterator& other) const {

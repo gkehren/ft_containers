@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/25 15:11:44 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/26 01:20:33 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iterator>
 #include <stdexcept>
 #include "Vector_Iterator.hpp"
+#include "Vector_Reverse_Iterator.hpp"
 
 namespace ft
 {
@@ -47,6 +48,10 @@ namespace ft
 			typedef typename ft::VectorIterator<T> iterator;
 			iterator	begin() { return (iterator(_data)); };
 			iterator	end() { return (iterator(_data + _size)); };
+
+			typedef typename ft::VectorReverseIterator<T> reverse_iterator;
+			reverse_iterator	rbegin() { return(reverse_iterator(_data + _size - 1)); };
+			reverse_iterator	rend() { return(reverse_iterator(_data - 1)); };
 	};
 
 	/*======|=============|======*/
