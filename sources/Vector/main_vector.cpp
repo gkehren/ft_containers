@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/27 16:45:05 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/27 16:52:39 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	main_vector(void)
 	//for (ft::vector<int>::reverse_iterator it = v.rbegin(); it != v.rend(); ++it)
 	//	std::cout << *it << std::endl;
 	std::cout << v.size() << std::endl;
+
 	try
 	{
 		std::cout << v.at(2) << std::endl;
@@ -36,6 +37,9 @@ void	main_vector(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	v.back() = 91;
+	for (ft::vector<int>::iterator it = v.begin(); it != v.end(); it++)
+		std::cout << *it << std::endl;
 
 	std::cout << std::endl << "---===| STL Vector |===---" << std::endl;
 	std::vector<int>	v1;
@@ -59,4 +63,7 @@ void	main_vector(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	v1.back() = 91;
+	for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); it++)
+		std::cout << *it << std::endl;
 }

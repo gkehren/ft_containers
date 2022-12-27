@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/27 16:45:20 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/27 16:54:00 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,27 @@ namespace ft
 				}
 			};
 
+			size_type	size() const
+			{
+				return (_size);
+			};
+
 			reference	at(size_type n)
 			{
 				if (n >= _size)
 					throw	_out_of_range(n);
 				return (_data[n]);
-			}
+			};
 
-			size_type	size() const
+			reference	front()
 			{
-				return (_size);
-			}
+				return (_data[0]);
+			};
+
+			reference	back()
+			{
+				return (_data[_size - 1]);
+			};
 
 			void	push_back(const T& value)
 			{
