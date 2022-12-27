@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 00:33:03 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/26 16:22:54 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/27 19:59:47 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ namespace ft
 			T*	_ptr;
 
 		public:
+			typedef	T			value_type;
+			typedef	value_type&	reference;
+			typedef	const		value_type&	const_reference;
+			typedef	value_type*	pointer;
+			typedef	const		value_type*	const_pointer;
+			typedef	typename	std::ptrdiff_t	difference_type;
+
 			vectorreverseiterator() {};
-			vectorreverseiterator(T* ptr) : _ptr(ptr) {};
+			vectorreverseiterator(pointer ptr) : _ptr(ptr) {};
 			vectorreverseiterator(vectorreverseiterator const &other) { *this = other; };
 
 			virtual ~vectorreverseiterator() {};
@@ -55,28 +62,28 @@ namespace ft
 				return (_ptr != other._ptr);
 			};
 
-			T& operator*() const {
+			reference operator*() const {
 				return (*_ptr);
 			};
-			T* operator->() const {
+			pointer operator->() const {
 				return (_ptr);
 			};
-			T& operator[](std::ptrdiff_t n) const {
+			reference operator[](difference_type n) const {
 				return (*(_ptr + n));
 			};
 
-			vectorreverseiterator& operator+=(std::ptrdiff_t n) {
+			vectorreverseiterator& operator+=(difference_type n) {
 				_ptr -= n;
 				return (*this);
 			};
-			vectorreverseiterator& operator-=(std::ptrdiff_t n) {
+			vectorreverseiterator& operator-=(difference_type n) {
 				_ptr += n;
 				return (*this);
 			};
-			std::ptrdiff_t operator+(vectorreverseiterator other) {
+			difference_type operator+(vectorreverseiterator other) {
 				return (_ptr - other._ptr);
 			};
-			std::ptrdiff_t operator-(vectorreverseiterator other) {
+			difference_type operator-(vectorreverseiterator other) {
 				return (_ptr + other._ptr);
 			};
 

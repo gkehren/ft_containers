@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/26 16:23:25 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/27 20:07:15 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <cstddef>
 #include <sstream>
 #include "vector_iterator.hpp"
+#include "vector_const_iterator.hpp"
 #include "vector_reverse_iterator.hpp"
+#include "vector_const_reverse_iterator.hpp"
 
 namespace ft
 {
@@ -25,11 +27,14 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef T value_type;
-			typedef Allocator allocator_type;
-			typedef typename std::size_t size_type;
-			typedef typename Allocator::reference reference;
-			typedef typename Allocator::const_reference const_reference;
+			typedef				T							value_type;
+			typedef				Allocator					allocator_type;
+			typedef	typename	std::ptrdiff_t				difference_type;
+			typedef	typename	std::size_t					size_type;
+			typedef	typename	Allocator::reference		reference;
+			typedef	typename	Allocator::const_reference	const_reference;
+			typedef	typename	Allocator::pointer			pointer;
+			typedef	typename	Allocator::const_pointer	const_pointer;
 
 			explicit vector(const Allocator& alloc = Allocator()) : _alloc(alloc), _data(0), _size(0), _capacity(0) {};
 
@@ -58,9 +63,17 @@ namespace ft
 			iterator	begin() { return (iterator(_data)); };
 			iterator	end() { return (iterator(_data + _size)); };
 
+			typedef typename ft::vectorconstiterator<T> const_iterator;
+			const_iterator	cbegin() const { return (const_iterator(_data)); };
+			const_iterator	cend() const { return (const_iterator(_data + _size)); };
+
 			typedef typename ft::vectorreverseiterator<T> reverse_iterator;
 			reverse_iterator	rbegin() { return(reverse_iterator(_data + _size - 1)); };
 			reverse_iterator	rend() { return(reverse_iterator(_data - 1)); };
+
+			typedef typename ft::vectorconstreverseiterator<T> const_reverse_iterator;
+			const_reverse_iterator	crbegin() const { return(const_reverse_iterator(_data + _size - 1)); };
+			const_reverse_iterator	crend() const { return(const_reverse_iterator(_data - 1)); };
 
 			reference		operator[](size_type n) { return (_data[n]); };
 			const_reference	operator[](size_type n) const { return (_data[n]); };
@@ -88,7 +101,7 @@ namespace ft
 				}
 			};
 
-			void	push_back(const T& value)
+			void	push_back(const_reference value)
 			{
 				if (_capacity == 0)
 				{
@@ -126,7 +139,7 @@ namespace ft
 				}
 				else
 				{
-					T* new_arr = _alloc.allocate(_capacity * 2);
+					pointer new_arr = _alloc.allocate(_capacity * 2);
 					for (size_t i = 0; i < _size; i++)
 					{
 						_alloc.construct(new_arr + i, *(_data + i));

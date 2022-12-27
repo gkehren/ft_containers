@@ -6,12 +6,14 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:09:39 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/26 16:21:33 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/27 19:58:25 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_ITERATOR
 #define VECTOR_ITERATOR
+
+#include <cstddef>
 
 namespace ft
 {
@@ -22,8 +24,15 @@ namespace ft
 			T*	_ptr;
 
 		public:
+			typedef	T			value_type;
+			typedef	value_type&	reference;
+			typedef	const		value_type&	const_reference;
+			typedef	value_type*	pointer;
+			typedef	const		value_type*	const_pointer;
+			typedef	typename	std::ptrdiff_t	difference_type;
+
 			vectoriterator() {};
-			vectoriterator(T* ptr) : _ptr(ptr) {};
+			vectoriterator(pointer ptr) : _ptr(ptr) {};
 			vectoriterator(vectoriterator const &other) { *this = other; };
 
 			virtual ~vectoriterator() {};
@@ -54,34 +63,34 @@ namespace ft
 				return (_ptr != other._ptr);
 			};
 
-			T& operator*() const {
+			reference	operator*() const {
 				return (*_ptr);
 			};
-			T* operator->() const {
+			pointer operator->() const {
 				return (_ptr);
 			};
-			T& operator[](std::ptrdiff_t n) const {
+			reference	operator[](difference_type n) const {
 				return (*(_ptr + n));
 			};
 
-			vectoriterator& operator+=(std::ptrdiff_t n) {
+			vectoriterator& operator+=(difference_type n) {
 				_ptr += n;
 				return (*this);
 			};
-			vectoriterator& operator-=(std::ptrdiff_t n) {
+			vectoriterator& operator-=(difference_type n) {
 				_ptr -= n;
 				return (*this);
 			};
-			vectoriterator operator+(std::ptrdiff_t other) {
+			vectoriterator operator+(difference_type other) {
 				return(vectoriterator(_ptr + other));
 			};
-			vectoriterator operator-(std::ptrdiff_t other) {
+			vectoriterator operator-(difference_type other) {
 				return(vectoriterator(_ptr - other));
 			};
-			std::ptrdiff_t operator+(vectoriterator other) {
+			difference_type operator+(vectoriterator other) {
 				return (_ptr + other._ptr);
 			};
-			std::ptrdiff_t operator-(vectoriterator other) {
+			difference_type operator-(vectoriterator other) {
 				return (_ptr - other._ptr);
 			};
 
