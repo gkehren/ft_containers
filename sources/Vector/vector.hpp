@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/27 20:08:39 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/28 01:57:41 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,29 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef				T							value_type;
-			typedef				Allocator					allocator_type;
-			typedef	typename	std::ptrdiff_t				difference_type;
-			typedef	typename	std::size_t					size_type;
-			typedef	typename	Allocator::reference		reference;
-			typedef	typename	Allocator::const_reference	const_reference;
-			typedef	typename	Allocator::pointer			pointer;
-			typedef	typename	Allocator::const_pointer	const_pointer;
+			typedef				T									value_type;
+			typedef				Allocator							allocator_type;
+			typedef	typename	Allocator::reference				reference;
+			typedef	typename	Allocator::const_reference			const_reference;
+			typedef	typename	Allocator::pointer					pointer;
+			typedef	typename	Allocator::const_pointer			const_pointer;
+			typedef typename	ft::vectoriterator<T>				iterator;
+			typedef typename	ft::vectorconstiterator<T>			const_iterator;
+			typedef typename	ft::vectorreverseiterator<T>		reverse_iterator;
+			typedef typename	ft::vectorconstreverseiterator<T>	const_reverse_iterator;
+			typedef	typename	std::ptrdiff_t						difference_type;
+			typedef	typename	std::size_t							size_type;
 
-			explicit vector(const Allocator& alloc = Allocator()) : _alloc(alloc), _data(0), _size(0), _capacity(0) {};
+			/*-----|-------------|-----*/
+			/*-----| Constructor |-----*/
+			/*-----|-------------|-----*/
 
-			vector(vector &other) : _alloc(allocator_type()), _size(0), _capacity(0) { *this = other; };
+			// empty container constructor (default constructor)
+			// Constructs an empty container, with no elements.
+			explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _data(0), _size(0), _capacity(0) {};
 
+			// fill constructor
+			// Constructs a container with n elements, Each element is a copy of val.
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _data(0), _size(0), _capacity(0)
 			{
 				this->reserve(n);
@@ -49,7 +59,21 @@ namespace ft
 				_capacity = n;
 			};
 
-			virtual ~vector()
+			// TODO
+			// range constructor
+			// Constructs a container with as many elements as the range [first, last),
+			// with each element constructed form its correspongind element in that range, in the same order.
+			template <class InputIterator>
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+			{};
+
+			// copy constructor
+			// Constructs a container with a copy of each of the elements in x, in the same order.
+			vector(const vector& x) : _alloc(allocator_type()), _size(0), _capacity(0) { *this = x; };
+
+			// vector destructor
+			// Destroys the container object.
+			~vector()
 			{
 				this->clear();
 				if (_capacity > 0)
@@ -59,25 +83,62 @@ namespace ft
 				}
 			};
 
-			typedef typename ft::vectoriterator<T> iterator;
+			// TODO
+			// Assign content
+			// Assins new contents to the container, replacing its current contents, and modifying its size accordingly.
+			vector&	operator=(const vector& x)
+			{};
+
+			/*-----|-----------|-----*/
+			/*-----| Iterators |-----*/
+			/*-----|-----------|-----*/
+
+			// Return iterator to beginning
 			iterator	begin() { return (iterator(_data)); };
+			const_iterator	begin() const { return (const_iterator(_data)); };
+			// Return iterator to end
 			iterator	end() { return (iterator(_data + _size)); };
-
-			typedef typename ft::vectorconstiterator<T> const_iterator;
-			const_iterator	cbegin() const { return (const_iterator(_data)); };
-			const_iterator	cend() const { return (const_iterator(_data + _size)); };
-
-			typedef typename ft::vectorreverseiterator<T> reverse_iterator;
+			const_iterator	end() const { return (const_iterator(_data + _size)); };
+			// Return reverse iterator to reverse beginning
 			reverse_iterator	rbegin() { return(reverse_iterator(_data + _size - 1)); };
+			const_reverse_iterator	rbegin() const { return(const_reverse_iterator(_data + _size - 1)); };
+			// Return reverse iterator to reverse end
 			reverse_iterator	rend() { return(reverse_iterator(_data - 1)); };
+			const_reverse_iterator	rend() const { return(const_reverse_iterator(_data - 1)); };
 
-			typedef typename ft::vectorconstreverseiterator<T> const_reverse_iterator;
-			const_reverse_iterator	crbegin() const { return(const_reverse_iterator(_data + _size - 1)); };
-			const_reverse_iterator	crend() const { return(const_reverse_iterator(_data - 1)); };
+			/*-----|----------|-----*/
+			/*-----| Capacity |-----*/
+			/*-----|----------|-----*/
 
-			reference		operator[](size_type n) { return (_data[n]); };
-			const_reference	operator[](size_type n) const { return (_data[n]); };
+			// Returns the number of elements in the vector.
+			size_type	size() const
+			{
+				return (_size);
+			};
 
+			// TODO
+			// Returns the maximum number of elements that the vector can hold.
+			//size_type	max_size() const
+			//{};
+
+			// TODO
+			// Resizes the container so that it contains n elements.
+			void	resize(size_type n, value_type val = value_type())
+			{};
+
+			// Returns the size of the storage currently allocated for the vector, expressed in terms of elements.
+			size_type	capacity() const
+			{
+				return (_capacity);
+			}
+
+			// Returns whether the vector is empty (i.e. whether its size is 0).
+			bool	empty() const
+			{
+				return ((_size == 0));
+			}
+
+			// Requests that the vector capacity be at least enough to contain n elements.
 			void	reserve(size_type n)
 			{
 				value_type	*new_arr;
@@ -91,39 +152,68 @@ namespace ft
 				_data = new_arr;
 			};
 
-			void	clear()
-			{
-				if (_size > 0)
-				{
-					for (iterator it = this->begin(); it != this->end(); it++)
-						_alloc.destroy(&(*it));
-					_size = 0;
-				}
-			};
+			// TODO
+			// Requests the container to reduce its capacity to fit its size.
+			void	shrink_to_fit()
+			{};
 
-			size_type	size() const
-			{
-				return (_size);
-			};
+			/*-----|----------------|-----*/
+			/*-----| Element access |-----*/
+			/*-----|----------------|-----*/
 
-			reference	at(size_type n)
+			// Returns a reference to the element at position n in the vector container (don't check bounds).
+			reference		operator[](size_type n) { return (_data[n]); };
+			const_reference	operator[](size_type n) const { return (_data[n]); };
+
+			// Returns a reference to the element at position n in the vector (check bounds).
+			reference		at(size_type n)
 			{
 				if (n >= _size)
-					throw	_out_of_range(n);
+					throw _out_of_range(n);
+				return (_data[n]);
+			};
+			const_reference	at(size_type n) const
+			{
+				if (n >= _size)
+					throw _out_of_range(n);
 				return (_data[n]);
 			};
 
-			reference	front()
+			// Returns a reference to the first element in the vector
+			reference		front()
+			{
+				return (_data[0]);
+			};
+			const_reference	front() const
 			{
 				return (_data[0]);
 			};
 
-			reference	back()
+			// Returns a reference to the last element in the vector
+			reference		back()
+			{
+				return (_data[_size - 1]);
+			};
+			const_reference	back() const
 			{
 				return (_data[_size - 1]);
 			};
 
-			void	push_back(const T& value)
+			/*-----|-----------|-----*/
+			/*-----| Modifiers |-----*/
+			/*-----|-----------|-----*/
+
+			// TODO
+			// Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
+			template <class InputIterator>
+			void	assign(InputIterator first, InputIterator last)
+			{};
+			void	assign(size_type n, const value_type& val)
+			{};
+
+			// Adds a new element at the end of the vectorm after its current last element.
+			// The Content of val is copied to the new element.
+			void	push_back(const value_type& val)
 			{
 				if (_capacity == 0)
 				{
@@ -132,16 +222,51 @@ namespace ft
 				}
 				if (_size == _capacity)
 					_extend();
-				_alloc.construct(_data + _size, value);
+				_alloc.construct(_data + _size, val);
 				_size++;
 			};
 
+			// Removes the last element in the vectorm effectively reducing the container size by one.
 			void	pop_back()
 			{
 				if (_size > 0)
 				{
 					_alloc.destroy(_data + (_size - 1));
 					_size--;
+				}
+			};
+
+			// TODO
+			// The vector is extended by inserting new elements before the element at the specifed position
+			// effectively increasing the container size by the number of elements inserted.
+			iterator	insert(iterator position, const value_type& val)
+			{};
+			void	insert(iterator position, size_type n, const value_type& val)
+			{};
+			template <class InputIterator>
+			void	insert(iterator position, InputIterator first, InputIterator last)
+			{};
+
+			// TODO
+			// Removes from the vector either a single element (position) or a range of elements ([first, last)).
+			iterator	erase(iterator position)
+			{};
+			iterator	erase(iterator first, iterator last)
+			{};
+
+			// TODO
+			// Exchanges the content of the container by the content of x, which is another vector object of the same type, Sizes may differ.
+			void	swap(vector& x)
+			{};
+
+			// Removes all elements from the vector (which are destroyed), leavin the container with a size of 0.
+			void	clear()
+			{
+				if (_size > 0)
+				{
+					for (iterator it = this->begin(); it != this->end(); it++)
+						_alloc.destroy(&(*it));
+					_size = 0;
 				}
 			};
 
@@ -181,6 +306,87 @@ namespace ft
 				return (std::out_of_range(ss.str()));
 			};
 	};
+
+/*-----|-------------------------------|-----*/
+/*-----| Non-member function overloads |-----*/
+/*-----|-------------------------------|-----*/
+
+// Relational operators for vector
+// Performs the appropriate comparison operation between the vector containers lhs and rhs.
+template <class T, class Alloc>
+bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	typename ft::vector<T>::const_iterator	it_lhs = lhs.begin();
+	typename ft::vector<T>::const_iterator	it_rhs = rhs.begin();
+
+	if (lhs == rhs)
+		return (false);
+	while (it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
+	{
+		it_lhs++;
+		it_rhs++;
+	}
+	if (it_rhs != rhs.end())
+		return (true);
+	return (false);
+};
+
+template <class T, class Alloc>
+bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	return (!(lhs == rhs));
+};
+
+template <class T, class Alloc>
+bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	typename ft::vector<T>::const_iterator	it_lhs = lhs.begin();
+	typename ft::vector<T>::const_iterator	it_rhs = rhs.begin();
+
+	if (lhs == rhs)
+		return (false);
+	while (it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
+	{
+		it_lhs++;
+		it_rhs++;
+	}
+	if (it_rhs != rhs.end())
+		return (true);
+	return (false);
+};
+
+template <class T, class Alloc>
+bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (true);
+	return (lhs < rhs);
+};
+
+template <class T, class Alloc>
+bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (false);
+	return (!(lhs < rhs));
+};
+
+template <class T, class Alloc>
+bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (true);
+	return (!(lhs < rhs));
+};
+
+// The content fo container x are exchanged with those of y,
+// Both container objects must be of the same type (same template parameters), although sizes may differ
+template <class T, class Alloc>
+void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+{
+	x.swap(y);
+};
+
 }
 
 #endif
