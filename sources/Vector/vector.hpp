@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/28 01:57:41 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/28 15:20:29 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <memory>
 #include <cstddef>
 #include <sstream>
+#include <limits>
+#include "../utils.hpp"
 #include "vector_iterator.hpp"
 #include "vector_const_iterator.hpp"
 #include "vector_reverse_iterator.hpp"
@@ -59,13 +61,20 @@ namespace ft
 				_capacity = n;
 			};
 
-			// TODO
 			// range constructor
 			// Constructs a container with as many elements as the range [first, last),
 			// with each element constructed form its correspongind element in that range, in the same order.
 			template <class InputIterator>
-			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
-			{};
+			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+			typename ft::enable_if<InputIterator::input_iterator, InputIterator>::type = NULL)
+			: _alloc(alloc), _data(0), _size(0), _capacity(0)
+			{
+				while (first != last)
+				{
+					this->push_back(*first);
+					first++;
+				}
+			};
 
 			// copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
@@ -83,11 +92,15 @@ namespace ft
 				}
 			};
 
-			// TODO
 			// Assign content
 			// Assins new contents to the container, replacing its current contents, and modifying its size accordingly.
 			vector&	operator=(const vector& x)
-			{};
+			{
+				this->clear();
+				for (iterator it = x.begin(); it != x.end(); it++)
+					this->push_back(*it);
+				return (*this);
+			};
 
 			/*-----|-----------|-----*/
 			/*-----| Iterators |-----*/
@@ -116,15 +129,39 @@ namespace ft
 				return (_size);
 			};
 
-			// TODO
 			// Returns the maximum number of elements that the vector can hold.
-			//size_type	max_size() const
-			//{};
+			size_type	max_size() const
+			{
+				return (std::numeric_limits<size_type>::max());
+			};
 
-			// TODO
 			// Resizes the container so that it contains n elements.
 			void	resize(size_type n, value_type val = value_type())
-			{};
+			{
+				value_type*	new_data;
+
+				new_data = _alloc.allocate(n);
+				if (n > _size)
+				{
+					for (size_t i = 0; i < _size; i++)
+						_alloc.construct(new_data + i, *(_data + i));
+					for (size_t i = 0; i < n - _size; i++)
+						_alloc.construct(new_data + _size + i, val);
+				}
+				else
+				{
+					for (size_t i = 0; i < n; i++)
+						_alloc.construct(new_data + i, *(_data + i));
+				}
+				if ( _size)
+				{
+					_alloc.destroy(_data);
+					_alloc.deallocate(_data, _capacity);
+				}
+				_capacity = n;
+				_size = n;
+				_data = new_data;
+			};
 
 			// Returns the size of the storage currently allocated for the vector, expressed in terms of elements.
 			size_type	capacity() const
@@ -141,21 +178,16 @@ namespace ft
 			// Requests that the vector capacity be at least enough to contain n elements.
 			void	reserve(size_type n)
 			{
-				value_type	*new_arr;
+				value_type	*new_data;
 
 				if (n <= _capacity)
 					return ;
-				new_arr = _alloc.allocate(n);
+				new_data = _alloc.allocate(n);
 				for (size_t i = 0; i < _size; i++)
-					_alloc.construct(new_arr + i, *(_data + i));
+					_alloc.construct(new_data + i, *(_data + i));
 				_capacity = n;
-				_data = new_arr;
+				_data = new_data;
 			};
-
-			// TODO
-			// Requests the container to reduce its capacity to fit its size.
-			void	shrink_to_fit()
-			{};
 
 			/*-----|----------------|-----*/
 			/*-----| Element access |-----*/
@@ -203,13 +235,21 @@ namespace ft
 			/*-----| Modifiers |-----*/
 			/*-----|-----------|-----*/
 
-			// TODO
 			// Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last)
-			{};
+			void	assign(InputIterator first, InputIterator last,
+			typename ft::enable_if<InputIterator::input_iterator, InputIterator>::type = NULL)
+			{
+				this->clear();
+				for (iterator it = first.begin(); it != last; it++)
+					this->push_back(*it);
+			};
 			void	assign(size_type n, const value_type& val)
-			{};
+			{
+				this->clear();
+				for (size_type i = 0; i < n; i++)
+					this->push_back(val);
+			};
 
 			// Adds a new element at the end of the vectorm after its current last element.
 			// The Content of val is copied to the new element.
@@ -236,28 +276,112 @@ namespace ft
 				}
 			};
 
-			// TODO
 			// The vector is extended by inserting new elements before the element at the specifed position
 			// effectively increasing the container size by the number of elements inserted.
 			iterator	insert(iterator position, const value_type& val)
-			{};
-			void	insert(iterator position, size_type n, const value_type& val)
-			{};
-			template <class InputIterator>
-			void	insert(iterator position, InputIterator first, InputIterator last)
-			{};
+			{
+				iterator		it;
+				difference_type	int_position = position - this->begin();
 
-			// TODO
+				if (this->capacity() == this->size())
+					_extend();
+				it = this->begin() + int_position;
+
+				vector	tmp(it, this->end());
+				for (size_t i = 0; i < tmp.size(); i++)
+					this->pop_back();
+
+				this->push_back(val);
+				it = tmp.begin();
+				for (size_t i = 0; i < tmp.size(); i++, it++)
+					this->push_back(*it);
+				return (this->begin() + int_position);
+			};
+			void	insert(iterator position, size_type n, const value_type& val)
+			{
+				difference_type	int_position = position - this->begin();
+
+				while (_capacity - _size < n)
+					_extend();
+
+				vector	tmp(this->begin() + int_position, this->end());
+				for (size_t i = 0; i < tmp.size(); i++)
+					this->pop_back();
+				while (n > 0)
+				{
+					this->push_back(val);
+					n--;
+				}
+				for (iterator it = tmp.begin(); it != tmp.end(); it++)
+					this->push_back(*it);
+			};
+			template <class InputIterator>
+			void	insert(iterator position, InputIterator first, InputIterator last,
+			typename ft::enable_if<InputIterator::input_iterator, InputIterator>::type = NULL)
+			{
+				size_t			n = 0;
+				difference_type	int_position = position - this->begin();
+
+				while (first != last)
+				{
+					first++;
+					n++;
+				}
+				first -= n;
+
+				while (_capacity - _size < n)
+					_extend();
+
+				vector	tmp(this->begin() + int_position, this->end());
+				for (size_t i = 0; i < tmp.size(); i++)
+					this->pop_back();
+				while (first != last)
+				{
+					this->push_back(*first);
+					first++;
+				}
+				for (iterator it = tmp.begin(); it != tmp.end(); it++)
+					this->push_back(*it);
+			};
+
 			// Removes from the vector either a single element (position) or a range of elements ([first, last)).
 			iterator	erase(iterator position)
-			{};
-			iterator	erase(iterator first, iterator last)
-			{};
+			{
+				vector	tmp(position + 1, this->end());
 
-			// TODO
+				for (size_t i = 0; i < tmp.size(); i++)
+					this->pop_back();
+				this->pop_back();
+				for (iterator it = tmp.begin(); it != tmp.end(); it++)
+					this->push_back(*it);
+				return (position);
+			};
+			iterator	erase(iterator first, iterator last)
+			{
+				iterator	tmp(first);
+
+				while (tmp != last)
+				{
+					erase(first);
+					tmp++;
+				}
+				return (first);
+			};
+
 			// Exchanges the content of the container by the content of x, which is another vector object of the same type, Sizes may differ.
 			void	swap(vector& x)
-			{};
+			{
+				value_type*	tmp_data = x._data;
+				size_t		tmp_size = x._size;
+				size_t		tmp_capacity = x._capacity;
+
+				x._data = _data;
+				x._size = _size;
+				x._capacity = _capacity;
+				_data = tmp_data;
+				_size = tmp_size;
+				_capacity = tmp_capacity;
+			};
 
 			// Removes all elements from the vector (which are destroyed), leavin the container with a size of 0.
 			void	clear()
@@ -276,7 +400,7 @@ namespace ft
 			size_t		_size; // number of elements
 			size_t		_capacity; // current maximal number of elements
 
-			// allocate to new_arr the double of _data and deallocate _data then new_arr becomes _data
+			// allocate to new_data the double of _data and deallocate _data then new_data becomes _data
 			void	_extend()
 			{
 				if (_capacity == 0)
@@ -286,14 +410,14 @@ namespace ft
 				}
 				else
 				{
-					pointer new_arr = _alloc.allocate(_capacity * 2);
+					pointer new_data = _alloc.allocate(_capacity * 2);
 					for (size_t i = 0; i < _size; i++)
 					{
-						_alloc.construct(new_arr + i, *(_data + i));
+						_alloc.construct(new_data + i, *(_data + i));
 						_alloc.destroy(_data + i);
 					}
 					_alloc.deallocate(_data, _capacity);
-					_data = new_arr;
+					_data = new_data;
 					_capacity *= 2;
 				}
 			};
@@ -317,6 +441,7 @@ template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
 	typename ft::vector<T>::const_iterator	it_lhs = lhs.begin();
+
 	typename ft::vector<T>::const_iterator	it_rhs = rhs.begin();
 
 	if (lhs == rhs)
