@@ -6,225 +6,187 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/30 21:16:52 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/31 16:55:30 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_containers.hpp"
 #include "vector.hpp"
 
+static void	test_1()
+{
+	ft::vector<int> test;
+
+	std::cout << CYAN << BOLD "---== BASIC FT DEMONSTRATION ==---" << RESET << std::endl;
+
+	std::cout << "Creating ft::vector test." << std::endl;
+
+	std::cout << "Empty() = " << std::boolalpha << test.empty() << std::endl << std::endl;
+
+	std::cout << CYAN << "---PUSH DATA---" << RESET << std::endl;
+	test.push_back(32);
+	std::cout << "Push : " << test[0] << std::endl;
+	test.push_back(64);
+	std::cout << "Push : " << test[1] << std::endl;
+
+	std::cout << "Empty() = " << std::boolalpha << test.empty() << std::endl << std::endl;
+
+	std::cout << CYAN << "---INFOS---" << RESET << std::endl;
+	std::cout << "Size = " <<  test.size() << std::endl;
+	std::cout << "Capacity = " << test.capacity() << std::endl;
+
+	std::cout << CYAN << "---PUSH DATA---" << RESET << std::endl;
+	test.push_back(128);
+	std::cout << "Push : " << test[2] << std::endl;
+	test.push_back(256);
+	std::cout << "Push : " << test[3] << std::endl;
+	test.push_back(512);
+	std::cout << "Push : " << test[4] << std::endl;
+
+	std::cout << CYAN << "---INFOS---" << RESET << std::endl;
+	std::cout << "Size = " <<  test.size() << std::endl;
+	std::cout << "Capacity = " << test.capacity() << std::endl;
+	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+
+	std::vector<int> stdtest;
+
+	std::cout << MAGENTA << BOLD "---== BASIC STD COMPARISON ==---" << RESET << std::endl;
+
+	std::cout << "Creating std::vector test." << std::endl;
+
+	std::cout << "Empty() = " << std::boolalpha << stdtest.empty() << std::endl << std::endl;
+
+	std::cout << MAGENTA << "---PUSH DATA---" << RESET << std::endl;
+	stdtest.push_back(32);
+	std::cout << "Push : " << stdtest[0] << std::endl;
+	stdtest.push_back(64);
+	std::cout << "Push : " << stdtest[1] << std::endl;
+
+	std::cout << "Empty() = " << std::boolalpha << stdtest.empty() << std::endl << std::endl;
+
+	std::cout << MAGENTA << "---INFOS---" << RESET << std::endl;
+	std::cout << "Size = " <<  stdtest.size() << std::endl;
+	std::cout << "Capacity = " << stdtest.capacity() << std::endl;
+
+	std::cout << MAGENTA << "---PUSH DATA---" << RESET << std::endl;
+	stdtest.push_back(128);
+	std::cout << "Push : " << stdtest[2] << std::endl;
+	stdtest.push_back(256);
+	std::cout << "Push : " << stdtest[3] << std::endl;
+	stdtest.push_back(512);
+	std::cout << "Push : " << stdtest[4] << std::endl;
+
+	std::cout << MAGENTA << "---INFOS---" << RESET << std::endl;
+	std::cout << "Size = " <<  stdtest.size() << std::endl;
+	std::cout << "Capacity = " << stdtest.capacity() << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+}
+
+void	clearscreen()
+{
+	for (int i = 0; i < 100; i++)
+		std::cout << std::endl;
+}
+
 int	choose_test()
 {
-	int	choice;
+	std::string	input;
+	int			choice;
 
 	std::cout << BOLD << UNDER << GREEN << "To select a test enter the corresponding number:" << RESET << std::endl;
-	std::cout << "1:  size" << std::endl;
-	std::cout << "2:  max_size" << std::endl;
-	std::cout << "3:  resize" << std::endl;
-	std::cout << "4:  capacity" << std::endl;
-	std::cout << "5:  empty" << std::endl;
-	std::cout << "6:  reserve" << std::endl;
-	std::cout << "7:  at" << std::endl;
-	std::cout << "8:  front" << std::endl;
-	std::cout << "9:  back" << std::endl;
-	std::cout << "10: assign" << std::endl;
-	std::cout << "11: push_back" << std::endl;
-	std::cout << "12: pop_back" << std::endl;
-	std::cout << "13: insert" << std::endl;
-	std::cout << "14: erase" << std::endl;
-	std::cout << "15: swap" << std::endl;
-	std::cout << "16: clear" << std::endl;
-	std::cout << CYAN << UNDER << "Enter a number:" << RESET << " ";
-	if (!(std::cin >> choice))
+	std::cout << BOLD << CYAN << "(exit | quit to leave)" << RESET << std::endl << std::endl;
+
+	std::cout << "1:  empty() | operator[] | push() | size() | capacity() | max_size()" << std::endl;
+	std::cout << "2:  at() | front() | back()" << std::endl;
+	std::cout << "3:  resize() | reserve()" << std::endl;
+	std::cout << "4:  pop_back()" << std::endl;
+	std::cout << "5:  iterators" << std::endl;
+	std::cout << "6:  reverse_iterators" << std::endl;
+	std::cout << "7:  constructors" << std::endl;
+	std::cout << "8:  assign()" << std::endl;
+	std::cout << "9:  insert()" << std::endl;
+	std::cout << "10: clear() | erase()" << std::endl;
+	std::cout << "11: swap()" << std::endl;
+	std::cout << "12: Non-member operators" << std::endl;
+	std::cout << "13: Non-menber swap" << std::endl;
+
+	std::cout << CYAN << UNDER << "Enter a number:" << RESET << std::endl << "> ";
+	std::getline(std::cin, input);
+	if (input == "exit" || input == "quit" || input == "q")
+		return (42);
+	clearscreen();
+	try
+	{
+		std::istringstream(input) >> choice;
+	}
+	catch(const std::invalid_argument&)
 	{
 		std::cout << RED << "Error: Invalid input. Please enter an integer." << RESET << std::endl;
 		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return (-1);
 	}
-	else if (choice < 1 || choice > 16)
+	if (choice < 1 || choice > 13)
 	{
 		std::cout << RED << "the number must be included in the choices" << RESET << std::endl;
 		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return (-1);
 	}
 	return (choice);
 
 }
 
-int	get_size()
+void	main_vector()
 {
-	int	size = -1;
 
-	while (size < 0)
+	while (1)
 	{
-		std::cout << CYAN << UNDER << "Enter the size of the vector:" << RESET << " ";
-		if (!(std::cin >> size))
+		int choice = choose_test();
+		switch (choice)
 		{
-			std::cout << RED << "Error: Invalid input. Please enter an integer." << RESET << std::endl;
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			return (-1);
+			case 1:
+				test_1();
+				break;
+			case 2:
+				std::cout << "You choose the test number 2" << std::endl;
+				break;
+			case 3:
+				std::cout << "You choose the test number 3" << std::endl;
+				break;
+			case 4:
+				std::cout << "You choose the test number 4" << std::endl;
+				break;
+			case 5:
+				std::cout << "You choose the test number 5" << std::endl;
+				break;
+			case 6:
+				std::cout << "You choose the test number 6" << std::endl;
+				break;
+			case 7:
+				std::cout << "You choose the test number 7" << std::endl;
+				break;
+			case 8:
+				std::cout << "You choose the test number 8" << std::endl;
+				break;
+			case 9:
+				std::cout << "You choose the test number 9" << std::endl;
+				break;
+			case 10:
+				std::cout << "You choose the test number 10" << std::endl;
+				break;
+			case 11:
+				std::cout << "You choose the test number 11" << std::endl;
+				break;
+			case 12:
+				std::cout << "You choose the test number 12" << std::endl;
+				break;
+			case 13:
+				std::cout << "You choose the test number 13" << std::endl;
+				break;
+			case 42:
+				return;
+			default:
+				std::cout << "Error: please choose a test again" << std::endl;
+				break;
 		}
 	}
-	return (size);
-}
-
-void	main_vector(int argc, char **argv)
-{
-	(void)argc;
-	(void)argv;
-
-	std::cout << BOLD << UNDER << GREEN << "To generate a vector enter the following values:" << RESET << std::endl;
-	int	size = get_size();
-	while (size == -1)
-		size = get_size();
-	ft::vector<int> vector(size, 42);
-
-	int choice = choose_test();
-	while (choice == -1)
-		choose_test();
-	if (choice == 1)
-	{
-		std::cout << vector.size() << std::endl;
-		return ;
-	}
-	else if (choice == 2)
-	{
-		std::cout << vector.max_size() << std::endl;
-		return ;
-	}
-	else if (choice == 3)
-	{
-		vector.resize(42);
-		return ;
-	}
-	else if (choice == 4)
-	{
-		std::cout << vector.capacity() << std::endl;
-		return ;
-	}
-	else if (choice == 5)
-	{
-		std::cout << vector.empty() << std::endl;
-		return ;
-	}
-	else if (choice == 6)
-	{
-		vector.reserve(42);
-		return ;
-	}
-	else if (choice == 7)
-	{
-		std::cout << vector.at(42) << std::endl;
-		return ;
-	}
-	else if (choice == 8)
-	{
-		std::cout << vector.front() << std::endl;
-		return ;
-	}
-	else if (choice == 9)
-	{
-		std::cout << vector.back() << std::endl;
-		return ;
-	}
-	else if (choice == 10)
-	{
-		vector.assign(42, 5);
-		return ;
-	}
-	else if (choice == 11)
-	{
-		vector.push_back(91);
-		return ;
-	}
-	else if (choice == 12)
-	{
-		vector.pop_back();
-		return ;
-	}
-	else if (choice == 13)
-	{
-		std::cout << "You choose the test number 13" << std::endl;
-		return ;
-	}
-	else if (choice == 14)
-	{
-		std::cout << "You choose the test number 14" << std::endl;
-		return ;
-	}
-	else if (choice == 15)
-	{
-		std::cout << "You choose the test number 15" << std::endl;
-		return ;
-	}
-	else if (choice == 16)
-	{
-		vector.clear();
-		return ;
-	}
-	else
-	{
-		std::cout << "Error: please choose a test again" << std::endl;
-	}
-
-
-
-
-
-
-
-	//std::cout << "---===| My Vector |===---" << std::endl;
-	//ft::vector<int>	v;
-
-	//v.push_back(42);
-	//v.push_back(5);
-	//v.push_back(9);
-	//v.pop_back();
-	////for (ft::vector<int>::iterator it = v.begin(); it != v.end(); it++)
-	////	std::cout << *it << std::endl;
-	////std::cout << "Reverse" << std::endl;
-	////for (ft::vector<int>::reverse_iterator it = v.rbegin(); it != v.rend(); ++it)
-	////	std::cout << *it << std::endl;
-	//std::cout << v.size() << std::endl;
-
-	//try
-	//{
-	//	std::cout << v.at(2) << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cerr << e.what() << '\n';
-	//}
-	//v.back() = 91;
-	//for (ft::vector<int>::iterator it = v.begin(); it != v.end(); it++)
-	//	std::cout << *it << std::endl;
-
-	//std::cout << std::endl << "---===| STL Vector |===---" << std::endl;
-	//std::vector<int>	v1;
-
-	//v1.push_back(42);
-	//v1.push_back(5);
-	//v1.push_back(9);
-	//v1.pop_back();
-	////for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); it++)
-	////	std::cout << *it << std::endl;
-	////std::cout << "Reverse" << std::endl;
-	////for (std::vector<int>::reverse_iterator it = v1.rbegin(); it != v1.rend(); ++it)
-	////	std::cout << *it << std::endl;
-	//std::cout << v1.size() << std::endl;
-
-	//try
-	//{
-	//	std::cout << v1.at(2) << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cerr << e.what() << '\n';
-	//}
-	//v1.back() = 91;
-	//for (std::vector<int>::iterator it = v1.begin(); it != v1.end(); it++)
-	//	std::cout << *it << std::endl;
 }

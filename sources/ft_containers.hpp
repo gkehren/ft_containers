@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:05:48 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/30 19:46:22 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:37 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 #include <vector>
 #include "ANSI_codes.hpp"
 
-void	main_vector(int argc, char** argv);
+void	main_vector();
 
 #endif
