@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 00:33:03 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/27 19:59:47 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/03 02:24:34 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ namespace ft
 
 			vectorreverseiterator() {};
 			vectorreverseiterator(pointer ptr) : _ptr(ptr) {};
+			vectorreverseiterator(vectoriterator<value_type> const &other) { _ptr = other.operator->(); };
 			vectorreverseiterator(vectorreverseiterator const &other) { *this = other; };
 
 			virtual ~vectorreverseiterator() {};
@@ -62,14 +63,31 @@ namespace ft
 				return (_ptr != other._ptr);
 			};
 
-			reference operator*() const {
+			reference operator*() {
 				return (*_ptr);
 			};
-			pointer operator->() const {
+			const_reference operator*() const {
+				return (*_ptr);
+			};
+			pointer operator->() {
 				return (_ptr);
 			};
-			reference operator[](difference_type n) const {
+			const_pointer operator->() const {
+				return (_ptr);
+			};
+			reference operator[](difference_type n) {
 				return (*(_ptr + n));
+			};
+			const_reference operator[](difference_type n) const {
+				return (*(_ptr + n));
+			};
+
+			vectorreverseiterator operator+(difference_type n) {
+				return (vectorreverseiterator(_ptr - n));
+			};
+
+			vectorreverseiterator operator-(difference_type n) {
+				return (vectorreverseiterator(_ptr + n));
 			};
 
 			vectorreverseiterator& operator+=(difference_type n) {

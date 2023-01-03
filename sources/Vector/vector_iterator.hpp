@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:09:39 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/30 19:45:31 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/03 01:28:56 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ namespace ft
 
 			virtual ~vectoriterator() {};
 
-			vectoriterator	operator++(int) {
+			vectoriterator	operator++() {
 				_ptr++;
 				return(*this);
 			};
-			vectoriterator	operator++() {
+			vectoriterator	operator++(int) {
 				vectoriterator tmp(*this);
 				operator++();
 				return (tmp);
 			};
-			vectoriterator	operator--(int) {
+			vectoriterator	operator--() {
 				_ptr--;
 				return (*this);
 			};
-			vectoriterator	operator--() {
+			vectoriterator	operator--(int) {
 				vectoriterator tmp(*this);
 				operator--();
 				return (tmp);
