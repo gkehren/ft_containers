@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/03 14:29:26 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:37:42 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -811,6 +811,193 @@ static void	test_6()
 	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
+static void test_7()
+{
+	std::cout << CYAN << BOLD "---==------| CONSTRUCTORS |------==---" << RESET << std::endl;
+
+	ft::vector<int>		v;
+	std::vector<int>	stdv;
+
+	std::cout << CYAN << "---------DEFAULT CONSTRUCTOR----------" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	std::cout << "ft::vector<int> v;" << std::endl;
+	std::cout << "v.capacity() = " << v.capacity() << std::endl;
+	std::cout << "v.size() = " << v.size() << std::endl;
+	v.push_back(42);
+	v.push_back(1);
+	v.push_back(56);
+	v.push_back(123);
+	std::cout << "v.push_back(42);" << std::endl;
+	std::cout << "v.push_back(1);" << std::endl;
+	std::cout << "v.push_back(56);" << std::endl;
+	std::cout << "v.push_back(123);" << std::endl;
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	std::cout << "std::vector<int> v;" << std::endl;
+	std::cout << "v.capacity() = " << stdv.capacity() << std::endl;
+	std::cout << "v.size() = " << stdv.size() << std::endl;
+	stdv.push_back(42);
+	stdv.push_back(1);
+	stdv.push_back(56);
+	stdv.push_back(123);
+	std::cout << "v.push_back(42);" << std::endl;
+	std::cout << "v.push_back(1);" << std::endl;
+	std::cout << "v.push_back(56);" << std::endl;
+	std::cout << "v.push_back(123);" << std::endl;
+	std::cout << CYAN << "--------ITERATORS CONSTRUCTOR---------" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	std::cout << "ft::vector<int> v_it(v.begin(), v.end());" << std::endl;
+	ft::vector<int> v_it(v.begin(), v.end());
+
+	std::cout << "for (ft::vector<int>::iterator it = v_it.begin(); it != v_it.end(); it++)" << std::endl;
+	std::cout << "    std::cout << *it << std::endl;" << std::endl;
+	for (ft::vector<int>::iterator it = v_it.begin(); it != v_it.end(); it++)
+		std::cout << *it << std::endl;
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	std::cout << "std::vector<int> v_it(v.begin(), v.end());" << std::endl;
+	std::vector<int> stdv_it(stdv.begin(), stdv.end());
+
+	std::cout << "for (std::vector<int>::iterator it = v_it.begin(); it != v_it.end(); it++)" << std::endl;
+	std::cout << "    std::cout << *it << std::endl;" << std::endl;
+	for (std::vector<int>::iterator stdit = stdv_it.begin(); stdit != stdv_it.end(); stdit++)
+		std::cout << *stdit << std::endl;
+
+	std::cout << CYAN << "----------COPY CONSTRUCTOR------------" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	std::cout << "ft::vector<int> v_cpy(v_it);" << std::endl;
+	ft::vector<int> v_cpy(v_it);
+
+	std::cout << "for (ft::vector<int>::iterator it = v_cpy.begin(); it != v_cpy.end(); it++)" << std::endl;
+	std::cout << "std::cout << *it << std::endl;" << std::endl;
+	for (ft::vector<int>::iterator it = v_cpy.begin(); it != v_cpy.end(); it++)
+		std::cout << *it << std::endl;
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	std::cout << "std::vector<int> v_cpy(v_it);" << std::endl;
+	std::vector<int> stdv_cpy(stdv_it);
+
+	std::cout << "for (std::vector<int>::iterator it = v_cpy.begin(); it != v_cpy.end(); it++)" << std::endl;
+	std::cout << "std::cout << *it << std::endl;" << std::endl;
+	for (std::vector<int>::iterator it = stdv_cpy.begin(); it != stdv_cpy.end(); it++)
+		std::cout << *it << std::endl;
+
+	std::cout << CYAN << "----------FILL CONSTRUCTOR------------" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	std::cout << "ft::vector<int> v_fill(25, 42);" << std::endl;
+	ft::vector<int> v_fill(25, 42);
+
+	std::cout << "for (ft::vector<int>::iterator it = v_fill.begin(); it != v_fill.end(); it++)" << std::endl;
+	std::cout << "std::cout << *it << std::endl;" << std::endl;
+	for (ft::vector<int>::iterator it = v_fill.begin(); it != v_fill.end(); it++)
+		std::cout << *it << std::endl;
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	std::cout << "std::vector<int> v_fill(25, 42);" << std::endl;
+	std::vector<int> stdv_fill(25, 42);
+
+	std::cout << "for (std::vector<int>::iterator it = v_fill.begin(); it != v_fill.end(); it++)" << std::endl;
+	std::cout << "std::cout << *it << std::endl;" << std::endl;
+	for (std::vector<int>::iterator stdit = stdv_fill.begin(); stdit != stdv_fill.end(); stdit++)
+		std::cout << *stdit << std::endl;
+}
+
+static void	test_8()
+{
+	std::cout << CYAN << BOLD "---==------| ASSIGN |------==---" << RESET << std::endl;
+
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	ft::vector<int> v1;
+	v1.push_back(42);
+	v1.push_back(1);
+	v1.push_back(56);
+	v1.push_back(123);
+	std::cout << "ft::vector<int> v1;" << std::endl;
+	std::cout << "For a vector v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	ft::vector<int> v2;
+	v2.push_back(420);
+	v2.push_back(9999);
+	v2.push_back(66666);
+	v2.push_back(1234567);
+	v2.push_back(507317);
+	v2.push_back(2147483640);
+	std::cout << "ft::vector<int> v2;" << std::endl;
+	std::cout << "For a vector v2 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v2.size() - 1; i++)
+		std::cout << v2[i] << ", ";
+	std::cout << v2[v2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	v1.assign(v2.begin(), v2.end());
+	std::cout << "v1.assign(v2.begin(), v2.end())" << std::endl;
+		std::cout << "v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	v2.assign(10, 8);
+	std::cout << "v2.assign(10, 8);" << std::endl;
+		std::cout << "v2 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v2.size() - 1; i++)
+		std::cout << v2[i] << ", ";
+	std::cout << v2[v2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+
+	std::vector<int> stdv1;
+	stdv1.push_back(42);
+	stdv1.push_back(1);
+	stdv1.push_back(56);
+	stdv1.push_back(123);
+	std::cout << "std::vector<int> v1;" << std::endl;
+	std::cout << "For a vector v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::vector<int> stdv2;
+	stdv2.push_back(420);
+	stdv2.push_back(9999);
+	stdv2.push_back(66666);
+	stdv2.push_back(1234567);
+	stdv2.push_back(507317);
+	stdv2.push_back(2147483640);
+	std::cout << "std::vector<int> v2;" << std::endl;
+	std::cout << "For a vector v2 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv2.size() - 1; i++)
+		std::cout << stdv2[i] << ", ";
+	std::cout << stdv2[stdv2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	stdv1.assign(stdv2.begin(), stdv2.end());
+	std::cout << "v1.assign(v2.begin(), v2.end())" << std::endl;
+		std::cout << "v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	stdv2.assign(10, 8);
+	std::cout << "v2.assign(10, 8);" << std::endl;
+		std::cout << "v2 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv2.size() - 1; i++)
+		std::cout << stdv2[i] << ", ";
+	std::cout << stdv2[stdv2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+}
+
 static void	clearscreen()
 {
 	for (int i = 0; i < 100; i++)
@@ -891,10 +1078,10 @@ void	main_vector()
 				test_6();
 				break;
 			case 7:
-				std::cout << "You choose the test number 7" << std::endl;
+				test_7();
 				break;
 			case 8:
-				std::cout << "You choose the test number 8" << std::endl;
+				test_8();
 				break;
 			case 9:
 				std::cout << "You choose the test number 9" << std::endl;

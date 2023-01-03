@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:09:39 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/03 01:28:56 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:20:10 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ namespace ft
 			bool	operator>=(const vectoriterator& other) const {
 				return (_ptr >= other._ptr);
 			};
+
+			static const bool input_iterator = true;
 	};
 }
 
