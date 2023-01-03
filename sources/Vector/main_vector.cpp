@@ -6,12 +6,13 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/03 02:27:02 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/03 14:29:26 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_containers.hpp"
 #include "vector.hpp"
+#include <iomanip>
 
 static void	test_1()
 {
@@ -101,6 +102,60 @@ static void	test_2()
 }
 
 static void	test_3()
+{
+
+	std::cout << CYAN << BOLD "---==--------| RESERVE |--------==---" << RESET << std::endl;
+	std::cout << "For a vector<int> = empty" << std::endl;
+	std::cout << CYAN << UNDER << "         FT        |       STD      " << RESET << std::endl;
+
+	ft::vector<int> v;
+	std::vector<int> stdv;
+
+	std::cout << "v.capacity() = " << v.capacity() << "   | v.capacity() = " << stdv.capacity() << std::endl;
+	v.reserve(100);
+	stdv.reserve(100);
+	std::cout << "v.reserve(100)" << "     | v.reserve(100)" << std::endl;
+	std::cout << "v.capacity() = " << v.capacity() << " | v.capacity() = " << stdv.capacity() << std::endl;
+	v.reserve(1);
+	stdv.reserve(1);
+	std::cout << "v.reserve(1)"  << "       | v.reserve(1)" << std::endl;
+	std::cout << "v.capacity() = " << v.capacity() << " | v.capacity() = " << stdv.capacity() << std::endl;
+	std::cout << CYAN << BOLD << "---==--------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << CYAN << BOLD "---==--------| RESIZE |--------==---" << RESET << std::endl;
+	std::cout << "For a vector<int> = empty" << std::endl;
+
+	ft::vector<int> v2;
+	ft::vector<int> stdv2;
+
+	std::cout << "v.capacity() = " << v2.capacity() << "   | v.capacity() = " << stdv2.capacity() << std::endl;
+	std::cout << "v.size() = " << v2.size() << "       | v.size() = " << stdv2.size() << std::endl;
+
+	v2.resize(10);
+	stdv2.resize(10);
+	std::cout << "v.resize(10);      | v.resize(10);" << std::endl;
+	for (size_t i = 0; i < v2.size(); i++)
+		std::cout<< std::setfill(' ') << std::setw(18) << v2[i] << " | " << stdv2[i] << std::endl;
+	std::cout << std::endl;
+
+	v2.resize(15, 15);
+	stdv2.resize(15, 15);
+	std::cout << "v.resize(15, 15);  | v.resize(15, 15);" << std::endl;
+	for (size_t i = 0; i < v2.size(); i++)
+		std::cout<< std::setfill(' ') << std::setw(18) << v2[i] << " | " << stdv2[i] << std::endl;
+	std::cout << std::endl;
+
+	v2.resize(3);
+	stdv2.resize(3);
+	std::cout << "v.resize(3);       | v.resize(3);" << std::endl;
+	for (size_t i = 0; i < v2.size(); i++)
+		std::cout<< std::setfill(' ') << std::setw(18) << v2[i] << " | " << stdv2[i] << std::endl;
+	std::cout << std::endl;
+
+	std::cout << CYAN << BOLD << "---==--------------------------==---" << RESET << std::endl << std::endl;
+
+}
+
+static void	test_4()
 {
 	std::cout << CYAN << BOLD "---==------| POP BACK |------==---" << RESET << std::endl;
 	std::cout << "For a vector<std::string> empty" << std::endl;
@@ -334,7 +389,7 @@ static void	test_3()
 	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
-static void	test_4()
+static void	test_5()
 {
 	ft::vector<int>				v;
 	ft::vector<int>::iterator	it;
@@ -671,7 +726,7 @@ static void	test_4()
 	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
-static void	test_5()
+static void	test_6()
 {
 	ft::vector<int>	v;
 	ft::vector<int>::reverse_iterator	it;
@@ -833,7 +888,7 @@ void	main_vector()
 				test_5();
 				break;
 			case 6:
-				std::cout << "You choose the test number 6" << std::endl;
+				test_6();
 				break;
 			case 7:
 				std::cout << "You choose the test number 7" << std::endl;
