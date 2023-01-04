@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/03 15:37:42 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/04 01:28:01 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -459,7 +459,7 @@ static void	test_5()
 	std::cout << "*(--it) = " << *(--stdit) << std::endl;
 	std::cout << "*it = " << *stdit << std::endl << std::endl;
 
-	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 
 	std::cout << CYAN << "-----------ARITHMETICS------------" << RESET << std::endl;
 	std::cout << CYAN << "--------------- FT ---------------" << RESET << std::endl;
@@ -504,7 +504,7 @@ static void	test_5()
 	std::cout << "*(it - 1) = " << *(stdit - 1) << std::endl;
 	std::cout << "*(it - 5) = " << *(stdit - 5) << std::endl << std::endl;
 
-	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 
 	std::cout << CYAN << "------------BOOLEANS--------------" << RESET << std::endl;
 	std::cout << CYAN << "--------------- FT ---------------" << RESET << std::endl;
@@ -548,7 +548,7 @@ static void	test_5()
 
 	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 
-	std::cout << CYAN << "--------------- STD ---------------" << RESET << std::endl;
+	std::cout << MAGENTA << "--------------- STD ---------------" << RESET << std::endl;
 	stdv.clear();
 	std::cout << "For a vector : ";
 	stdv.push_back(5);
@@ -587,7 +587,7 @@ static void	test_5()
 	std::cout << "it_end >= it_beg is " << std::boolalpha << (stdit_end >= stdit_beg) << std::endl;
 	std::cout << "it_end >= it_end is " << std::boolalpha << (stdit_end >= stdit_end) << std::endl << std::endl;
 
-	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 
 	std::cout << CYAN << "------------DEREF--------------" << RESET << std::endl;
 	std::cout << CYAN << "--------------- FT ---------------" << RESET << std::endl;
@@ -723,7 +723,7 @@ static void	test_5()
 	std::cout << "iterator it_cpy(it);" << std::endl;
 	std::cout << "cout *it_cpy = " << *stdit_cpy << std::endl << std::endl;
 
-	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
 static void	test_6()
@@ -808,7 +808,7 @@ static void	test_6()
 	std::cout << "cout *(it + 3) = " << *(stdit + 3) << std::endl;
 	std::cout << "cout *(it + 4) = " << *(stdit + 4) << std::endl << std::endl;
 
-	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+	std::cout << MAGENTA << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
 static void test_7()
@@ -896,6 +896,7 @@ static void test_7()
 	std::cout << "std::cout << *it << std::endl;" << std::endl;
 	for (std::vector<int>::iterator stdit = stdv_fill.begin(); stdit != stdv_fill.end(); stdit++)
 		std::cout << *stdit << std::endl;
+	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
 }
 
 static void	test_8()
@@ -996,6 +997,883 @@ static void	test_8()
 		std::cout << stdv2[i] << ", ";
 	std::cout << stdv2[stdv2.size() - 1];
 	std::cout << "}" << std::endl << std::endl;
+	std::cout << CYAN << BOLD << "---==------------------------==---" << RESET << std::endl << std::endl;
+}
+
+static void	test_9()
+{
+	std::cout << CYAN << BOLD "---==------| INSERT |------==---" << RESET << std::endl;
+
+	ft::vector<std::string>	v1;
+
+	v1.push_back("hey");
+	v1.push_back("how");
+	v1.push_back("are");
+	v1.push_back("you");
+
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	std::cout << "--- Insert at the begining ---" << std::endl << std::endl;
+	std::cout << "For a std::string vector v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	v1.insert(v1.begin(), "hello world! ");
+	std::cout << "insert(v1.begin(), \"hello world! \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert at the middle ---" << std::endl << std::endl;
+	v1.insert(v1.begin() + 3, "hey buddy! ");
+	std::cout << "insert(v1.begin(), \"hey buddy! \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert at the end ---" << std::endl << std::endl;
+	v1.insert(v1.end(), "Anybody here? ");
+	std::cout << "insert(v1.end(), \"Anybody here? \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v1.size() - 1; i++)
+		std::cout << v1[i] << ", ";
+	std::cout << v1[v1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert in empty vector ---" << std::endl << std::endl;
+	ft::vector<std::string> v2;
+	std::cout << "For a std::string vector v2 = {}" << std::endl << std::endl;
+
+	v2.insert(v2.begin(), "I'm alone here!");
+	std::cout << "insert(v2.begin(), \"I'm alone here!\")" << std::endl;
+
+	std::cout << "v2 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < v2.size() - 1; i++)
+		std::cout << v2[i] << ", ";
+	std::cout << v2[v2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+
+	std::vector<std::string>	stdv1;
+
+	stdv1.push_back("hey");
+	stdv1.push_back("how");
+	stdv1.push_back("are");
+	stdv1.push_back("you");
+
+	std::cout << "--- Insert at the begining ---" << std::endl << std::endl;
+	std::cout << "For a std::string vector v1 = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	stdv1.insert(stdv1.begin(), "hello world! ");
+	std::cout << "insert(v1.begin(), \"hello world! \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert at the middle ---" << std::endl << std::endl;
+	stdv1.insert(stdv1.begin() + 3, "hey buddy! ");
+	std::cout << "insert(v1.begin(), \"hey buddy! \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert at the end ---" << std::endl << std::endl;
+	stdv1.insert(stdv1.end(), "Anybody here? ");
+	std::cout << "insert(v1.end(), \"Anybody here? \")" << std::endl;
+
+	std::cout << "v1 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv1.size() - 1; i++)
+		std::cout << stdv1[i] << ", ";
+	std::cout << stdv1[stdv1.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << "--- Insert in empty vector ---" << std::endl << std::endl;
+	std::vector<std::string> stdv2;
+	std::cout << "For a std::string vector v2 = {}" << std::endl << std::endl;
+
+	stdv2.insert(stdv2.begin(), "I'm alone here!");
+	std::cout << "insert(v2.begin(), \"I'm alone here!\")" << std::endl;
+
+	std::cout << "v2 now = ";
+	std::cout << "{";
+	for (size_t i = 0; i < stdv2.size() - 1; i++)
+		std::cout << stdv2[i] << ", ";
+	std::cout << stdv2[stdv2.size() - 1];
+	std::cout << "}" << std::endl << std::endl;
+
+	std::cout << CYAN << BOLD << "---==----------------------==---" << RESET << std::endl << std::endl;
+}
+
+static void	test_10()
+{
+	std::cout << CYAN << BOLD "---==------| CLEAR & ERASE |------==---" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	ft::vector<std::string> hey(20, "hey");
+
+	std::cout << "---- Clear() ----" << std::endl;
+
+	std::cout << "For a vector named hey = {";
+	for (ft::vector<std::string>::iterator it = hey.begin(); it + 1 != hey.end(); it++)
+		std::cout << *it << ", ";
+	if (hey.empty() == false)
+		std::cout << hey[hey.size() - 1] << "}" << std::endl;
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "ft::vector<std::string> hey(20, \"hey\");" << std::endl;
+	std::cout << "hey.size() = " << hey.size() << std::endl;
+	std::cout << "hey.capacity() = " << hey.capacity() << std::endl << std::endl;
+
+	hey.clear();
+	std::cout << "hey.clear();" << std::endl;
+	std::cout << "hey = {";
+	if (hey.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hey.begin(); it + 1 != hey.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hey[hey.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << "hey.size() = " << hey.size() << std::endl;
+	std::cout << "hey.capacity() = " << hey.capacity() << std::endl << std::endl;
+
+	std::cout << "---- Erase() ----" << std::endl;
+
+	ft::vector<std::string> hidden(10, "🌙");
+
+	hidden.insert(hidden.begin() + 2, "👾");
+	hidden.insert(hidden.begin() + 5, "👾");
+	hidden.insert(hidden.begin() + 5, "👾");
+	hidden.insert(hidden.begin() + 9, "👾");
+	std::cout << "For a string vector hidden = {";
+	if (hidden.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hidden.begin(); it + 1 != hidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hidden[hidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	hidden.erase(hidden.begin() + 2);
+	std::cout << "hidden.erase(hidden.begin() + 2);" << std::endl;
+	std::cout << "now hidden = {";
+	if (hidden.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hidden.begin(); it + 1 != hidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hidden[hidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	hidden.erase(hidden.begin() + 8);
+	std::cout << "hidden.erase(hidden.begin() + 8);" << std::endl;
+	std::cout << "now hidden = {";
+	if (hidden.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hidden.begin(); it + 1 != hidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hidden[hidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	hidden.erase(hidden.begin() + 4, hidden.begin() + 6);
+	std::cout << "hidden.erase(hidden.begin() + 4, hidden.begin() + 6);" << std::endl;
+	std::cout << "now hidden = {";
+	if (hidden.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hidden.begin(); it + 1 != hidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hidden[hidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	hidden.erase(hidden.begin(), hidden.end());
+	std::cout << "hidden.erase(hidden.begin(), hidden.end());" << std::endl;
+	std::cout << "now hidden = {";
+	if (hidden.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = hidden.begin(); it + 1 != hidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << hidden[hidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	std::vector<std::string> stdhey(20, "hey");
+
+	std::cout << "---- Clear() ----" << std::endl;
+
+	std::cout << "For a vector named hey = {";
+	for (std::vector<std::string>::iterator it = stdhey.begin(); it + 1 != stdhey.end(); it++)
+		std::cout << *it << ", ";
+	if (stdhey.empty() == false)
+		std::cout << stdhey[stdhey.size() - 1] << "}" << std::endl;
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "std::vector<std::string> hey(20, \"hey\");" << std::endl;
+	std::cout << "hey.size() = " << stdhey.size() << std::endl;
+	std::cout << "hey.capacity() = " << stdhey.capacity() << std::endl << std::endl;
+
+	stdhey.clear();
+	std::cout << "hey.clear();" << std::endl;
+	std::cout << "hey = {";
+	if (stdhey.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhey.begin(); it + 1 != stdhey.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhey[stdhey.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << "hey.size() = " << stdhey.size() << std::endl;
+	std::cout << "hey.capacity() = " << stdhey.capacity() << std::endl << std::endl;
+
+	std::cout << "---- Erase() ----" << std::endl;
+
+	std::vector<std::string> stdhidden(10, "🌙");
+
+	stdhidden.insert(stdhidden.begin() + 2, "👾");
+	stdhidden.insert(stdhidden.begin() + 5, "👾");
+	stdhidden.insert(stdhidden.begin() + 5, "👾");
+	stdhidden.insert(stdhidden.begin() + 9, "👾");
+	std::cout << "For a string vector hidden = {";
+	if (stdhidden.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhidden.begin(); it + 1 != stdhidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhidden[stdhidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	stdhidden.erase(stdhidden.begin() + 2);
+	std::cout << "hidden.erase(hidden.begin() + 2);" << std::endl;
+	std::cout << "now hidden = {";
+	if (stdhidden.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhidden.begin(); it + 1 != stdhidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhidden[stdhidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	stdhidden.erase(stdhidden.begin() + 8);
+	std::cout << "hidden.erase(hidden.begin() + 8);" << std::endl;
+	std::cout << "now hidden = {";
+	if (stdhidden.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhidden.begin(); it + 1 != stdhidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhidden[stdhidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	stdhidden.erase(stdhidden.begin() + 4, stdhidden.begin() + 6);
+	std::cout << "hidden.erase(hidden.begin() + 4, hidden.begin() + 6);" << std::endl;
+	std::cout << "now hidden = {";
+	if (stdhidden.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhidden.begin(); it + 1 != stdhidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhidden[stdhidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+	stdhidden.erase(stdhidden.begin(), stdhidden.end());
+	std::cout << "hidden.erase(hidden.begin(), hidden.end());" << std::endl;
+	std::cout << "now hidden = {";
+	if (stdhidden.empty() == false)
+	{
+		for (std::vector<std::string>::iterator it = stdhidden.begin(); it + 1 != stdhidden.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdhidden[stdhidden.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+	std::cout << std::endl;
+
+
+	std::cout << CYAN << BOLD << "---==-----------------------------==---" << RESET << std::endl << std::endl;
+}
+
+static void	test_11()
+{
+	std::cout << CYAN << BOLD "---==------| SWAP |------==---" << RESET << std::endl;
+	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
+	ft::vector<std::string> argent(10, "💿");
+	std::cout << "For a string vector argent = {";
+	if (argent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = argent.begin(); it + 1 != argent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << argent[argent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	ft::vector<std::string> gold(5, "📀");
+	std::cout << "For a string vector gold = {";
+	if (gold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = gold.begin(); it + 1 != gold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << gold[gold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	gold.swap(argent);
+	std::cout << "gold.swap(argent);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (argent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = argent.begin(); it + 1 != argent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << argent[argent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (gold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = gold.begin(); it + 1 != gold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << gold[gold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	gold.swap(argent);
+	std::cout << "gold.swap(argent);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (argent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = argent.begin(); it + 1 != argent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << argent[argent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (gold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = gold.begin(); it + 1 != gold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << gold[gold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	argent.swap(gold);
+	std::cout << "argent.swap(gold);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (argent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = argent.begin(); it + 1 != argent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << argent[argent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (gold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = gold.begin(); it + 1 != gold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << gold[gold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	ft::vector<std::string>	empty_one;
+	ft::vector<std::string>	empty_two;
+
+	std::cout << "For a string vector empty_one = {";
+	if (empty_one.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = empty_one.begin(); it + 1 != empty_one.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << empty_one[empty_one.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "For a string vector empty_two = {";
+	if (empty_two.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = empty_two.begin(); it + 1 != empty_two.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << empty_two[empty_two.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	empty_one.swap(empty_two);
+	std::cout << "empty_one.swap(empty_two);" << std::endl;
+
+	std::cout << "now empty_one = {";
+	if (empty_one.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = empty_one.begin(); it + 1 != empty_one.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << empty_one[empty_one.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now empty_two = {";
+	if (empty_two.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = empty_two.begin(); it + 1 != empty_two.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << empty_two[empty_two.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl << std::endl;
+
+	std::cout << MAGENTA << "---------STD---------" << RESET << std::endl;
+	ft::vector<std::string> stdargent(10, "💿");
+	std::cout << "For a string vector argent = {";
+	if (stdargent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdargent.begin(); it + 1 != stdargent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdargent[stdargent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	ft::vector<std::string> stdgold(5, "📀");
+	std::cout << "For a string vector gold = {";
+	if (stdgold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdgold.begin(); it + 1 != stdgold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdgold[stdgold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	stdgold.swap(stdargent);
+	std::cout << "gold.swap(argent);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdargent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdargent.begin(); it + 1 != stdargent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdargent[stdargent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdgold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdgold.begin(); it + 1 != stdgold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdgold[stdgold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	stdgold.swap(stdargent);
+	std::cout << "gold.swap(argent);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdargent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdargent.begin(); it + 1 != stdargent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdargent[stdargent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdgold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdgold.begin(); it + 1 != stdgold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdgold[stdgold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	stdargent.swap(stdgold);
+	std::cout << "argent.swap(gold);" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdargent.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdargent.begin(); it + 1 != stdargent.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdargent[stdargent.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now argent = {";
+	if (stdgold.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdgold.begin(); it + 1 != stdgold.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdgold[stdgold.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	ft::vector<std::string>	stdempty_one;
+	ft::vector<std::string>	stdempty_two;
+
+	std::cout << "For a string vector empty_one = {";
+	if (stdempty_one.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdempty_one.begin(); it + 1 != stdempty_one.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdempty_one[stdempty_one.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "For a string vector empty_two = {";
+	if (stdempty_two.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdempty_two.begin(); it + 1 != stdempty_two.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdempty_two[stdempty_two.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	stdempty_one.swap(stdempty_two);
+	std::cout << "empty_one.swap(empty_two);" << std::endl;
+
+	std::cout << "now empty_one = {";
+	if (stdempty_one.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdempty_one.begin(); it + 1 != stdempty_one.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdempty_one[stdempty_one.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl;
+
+	std::cout << "now empty_two = {";
+	if (stdempty_two.empty() == false)
+	{
+		for (ft::vector<std::string>::iterator it = stdempty_two.begin(); it + 1 != stdempty_two.end(); it++)
+			std::cout << *it << ", ";
+		std::cout << stdempty_two[stdempty_two.size() - 1] << "}" << std::endl;
+	}
+	else
+		std::cout << "}" << std::endl << std::endl;
+
+
+	std::cout << CYAN << BOLD << "---==--------------------==---" << RESET << std::endl << std::endl;
+}
+
+static void	test_12()
+{
+	std::cout << CYAN << BOLD "---==------| Non-member operators |------==---" << RESET << std::endl;
+	std::cout << CYAN << "---------FT-----------" << RESET << std::endl;
+	ft::vector<std::string>	v_str1;
+
+	v_str1.push_back("🎥");
+	v_str1.push_back("🎬");
+	v_str1.push_back("📺");
+	v_str1.push_back("📷");
+	v_str1.push_back("📼");
+
+	ft::vector<std::string>	v_str2(v_str1);
+
+	ft::vector<std::string>	v_str3;
+
+	v_str3.push_back("💼");
+	v_str3.push_back("📁");
+	v_str3.push_back("📊");
+	v_str3.push_back("📈");
+	v_str3.push_back("📉");
+
+	std::cout << "{";
+	for (size_t i = 0; i < v_str1.size() - 1; i++)
+		std::cout << v_str1[i] << ", ";
+	std::cout << v_str1[v_str1.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < v_str2.size() - 1; i++)
+		std::cout << v_str2[i] << ", ";
+	std::cout << v_str2[v_str2.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < v_str3.size() - 1; i++)
+		std::cout << v_str3[i] << ", ";
+	std::cout << v_str3[v_str3.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "v_str1 == v_str1 : " << std::boolalpha << (v_str1 == v_str1) << std::endl << std::endl;
+
+	std::cout << "v_str1 == v_str2 : " << std::boolalpha << (v_str1 == v_str2) << std::endl;
+	std::cout << "v_str1 != v_str2 : " << std::boolalpha << (v_str1 != v_str2) << std::endl << std::endl;
+
+	std::cout << "v_str1 == v_str3 : " << std::boolalpha << (v_str1 == v_str3) << std::endl;
+	std::cout << "v_str1 != v_str3 : " << std::boolalpha << (v_str1 != v_str3) << std::endl << std::endl;
+
+	std::cout << CYAN << "--- SUPERIOR & EQUAL-SUPERIOR ---" << RESET << std::endl;
+	ft::vector<int>	v_nums1;
+
+	v_nums1.push_back(0);
+	v_nums1.push_back(1);
+	v_nums1.push_back(10);
+	v_nums1.push_back(11);
+	v_nums1.push_back(100);
+	v_nums1.push_back(101);
+	v_nums1.push_back(110);
+	v_nums1.push_back(111);
+
+	ft::vector<int>	v_nums2(v_nums1);
+
+	v_nums2.push_back(1000);
+
+	std::cout << "{";
+	for (size_t i = 0; i < v_nums1.size() - 1; i++)
+		std::cout << v_nums1[i] << ", ";
+	std::cout << v_nums1[v_nums1.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < v_nums2.size() - 1; i++)
+		std::cout << v_nums2[i] << ", ";
+	std::cout << v_nums2[v_nums2.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "v_nums1 < v_nums1 = " << (v_nums1 < v_nums1) << std::endl;
+	std::cout << "v_nums1 < v_nums2 = " << (v_nums1 < v_nums2) << std::endl;
+	std::cout << "v_nums2 < v_nums1 = " << (v_nums2 < v_nums1) << std::endl;
+	std::cout << "v_nums1 <= v_nums1 = " << (v_nums1 <= v_nums1) << std::endl;
+	std::cout << "v_nums1 <= v_nums2 = " << (v_nums1 <= v_nums2) << std::endl;
+	std::cout << "v_nums2 <= v_nums1 = " << (v_nums2 <= v_nums1) << std::endl << std::endl;
+
+	std::cout << CYAN << "--- INFERIOR & EQUAL-INFERIOR ---" << RESET << std::endl << std::endl;
+
+	std::cout << "v_nums1 > v_nums1 = " << (v_nums1 > v_nums1) << std::endl;
+	std::cout << "v_nums1 > v_nums2 = " << (v_nums1 > v_nums2) << std::endl;
+	std::cout << "v_nums2 > v_nums1 = " << (v_nums2 > v_nums1) << std::endl;
+	std::cout << "v_nums1 >= v_nums1 = " << (v_nums1 >= v_nums1) << std::endl;
+	std::cout << "v_nums1 >= v_nums2 = " << (v_nums1 >= v_nums2) << std::endl;
+	std::cout << "v_nums2 >= v_nums1 = " << (v_nums2 >= v_nums1) << std::endl << std::endl;
+
+
+	std::cout << MAGENTA<< "---------STD----------" << RESET << std::endl;
+	std::vector<std::string>	stdv_str1;
+
+	stdv_str1.push_back("🎥");
+	stdv_str1.push_back("🎬");
+	stdv_str1.push_back("📺");
+	stdv_str1.push_back("📷");
+	stdv_str1.push_back("📼");
+
+	std::vector<std::string>	stdv_str2(stdv_str1);
+
+	std::vector<std::string>	stdv_str3;
+
+	stdv_str3.push_back("💼");
+	stdv_str3.push_back("📁");
+	stdv_str3.push_back("📊");
+	stdv_str3.push_back("📈");
+	stdv_str3.push_back("📉");
+
+	std::cout << "{";
+	for (size_t i = 0; i < stdv_str1.size() - 1; i++)
+		std::cout << stdv_str1[i] << ", ";
+	std::cout << stdv_str1[stdv_str1.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < stdv_str2.size() - 1; i++)
+		std::cout << stdv_str2[i] << ", ";
+	std::cout << stdv_str2[stdv_str2.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < stdv_str3.size() - 1; i++)
+		std::cout << stdv_str3[i] << ", ";
+	std::cout << stdv_str3[stdv_str3.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "v_str1 == v_str1 : " << std::boolalpha << (stdv_str1 == stdv_str1) << std::endl << std::endl;
+
+	std::cout << "v_str1 == v_str2 : " << std::boolalpha << (stdv_str1 == stdv_str2) << std::endl;
+	std::cout << "v_str1 != v_str2 : " << std::boolalpha << (stdv_str1 != stdv_str2) << std::endl << std::endl;
+
+	std::cout << "v_str1 == v_str3 : " << std::boolalpha << (stdv_str1 == stdv_str3) << std::endl;
+	std::cout << "v_str1 != v_str3 : " << std::boolalpha << (stdv_str1 != stdv_str3) << std::endl << std::endl;
+
+	std::cout << CYAN << "--- SUPERIOR & EQUAL-SUPERIOR ---" << RESET << std::endl;
+	std::vector<int>	stdv_nums1;
+
+	stdv_nums1.push_back(0);
+	stdv_nums1.push_back(1);
+	stdv_nums1.push_back(10);
+	stdv_nums1.push_back(11);
+	stdv_nums1.push_back(100);
+	stdv_nums1.push_back(101);
+	stdv_nums1.push_back(110);
+	stdv_nums1.push_back(111);
+
+	std::vector<int>	stdv_nums2(stdv_nums1);
+
+	stdv_nums2.push_back(1000);
+
+	std::cout << "{";
+	for (size_t i = 0; i < stdv_nums1.size() - 1; i++)
+		std::cout << stdv_nums1[i] << ", ";
+	std::cout << stdv_nums1[stdv_nums1.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "{";
+	for (size_t i = 0; i < stdv_nums2.size() - 1; i++)
+		std::cout << stdv_nums2[i] << ", ";
+	std::cout << stdv_nums2[stdv_nums2.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << "v_nums1 < v_nums1 = " << (stdv_nums1 < stdv_nums1) << std::endl;
+	std::cout << "v_nums1 < v_nums2 = " << (stdv_nums1 < stdv_nums2) << std::endl;
+	std::cout << "v_nums2 < v_nums1 = " << (stdv_nums2 < stdv_nums1) << std::endl;
+	std::cout << "v_nums1 <= v_nums1 = " << (stdv_nums1 <= stdv_nums1) << std::endl;
+	std::cout << "v_nums1 <= v_nums2 = " << (stdv_nums1 <= stdv_nums2) << std::endl;
+	std::cout << "v_nums2 <= v_nums1 = " << (stdv_nums2 <= stdv_nums1) << std::endl << std::endl;
+
+	std::cout << CYAN << "--- INFERIOR & EQUAL-INFERIOR ---" << RESET << std::endl << std::endl;
+
+	std::cout << "v_nums1 > v_nums1 = " << (stdv_nums1 > stdv_nums1) << std::endl;
+	std::cout << "v_nums1 > v_nums2 = " << (stdv_nums1 > stdv_nums2) << std::endl;
+	std::cout << "v_nums2 > v_nums1 = " << (stdv_nums2 > stdv_nums1) << std::endl;
+	std::cout << "v_nums1 >= v_nums1 = " << (stdv_nums1 >= stdv_nums1) << std::endl;
+	std::cout << "v_nums1 >= v_nums2 = " << (stdv_nums1 >= stdv_nums2) << std::endl;
+	std::cout << "v_nums2 >= v_nums1 = " << (stdv_nums2 >= stdv_nums1) << std::endl << std::endl;
+
+	std::cout << CYAN << BOLD << "---==------------------------------------==---" << RESET << std::endl << std::endl;
+}
+
+static void	test_13()
+{
+	std::cout << CYAN << BOLD "---==------| Non-member SWAP |------==---" << RESET << std::endl;
+	std::cout << CYAN << "---------FT-----------" << RESET << std::endl;
+
+	ft::vector<int> v_nums_a(10, 10);
+	ft::vector<int> v_nums_b(10, 50);
+
+	std::cout << "a = {";
+	for (size_t i = 0; i < v_nums_a.size() - 1; i++)
+		std::cout << v_nums_a[i] << ", ";
+	std::cout << v_nums_a[v_nums_a.size() - 1];
+	std::cout << "}" << std::endl;
+	std::cout << "b = {";
+	for (size_t i = 0; i < v_nums_b.size() - 1; i++)
+		std::cout << v_nums_b[i] << ", ";
+	std::cout << v_nums_b[v_nums_b.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << std::endl << "swap(a, b);" << std::endl << std::endl;
+	swap(v_nums_a, v_nums_b);
+
+	std::cout << "a = {";
+	for (size_t i = 0; i < v_nums_a.size() - 1; i++)
+		std::cout << v_nums_a[i] << ", ";
+	std::cout << v_nums_a[v_nums_a.size() - 1];
+	std::cout << "}" << std::endl;
+	std::cout << "b = {";
+	for (size_t i = 0; i < v_nums_b.size() - 1; i++)
+		std::cout << v_nums_b[i] << ", ";
+	std::cout << v_nums_b[v_nums_b.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << MAGENTA<< "---------STD----------" << RESET << std::endl;
+	std::vector<int> stdv_nums_a(10, 10);
+	std::vector<int> stdv_nums_b(10, 50);
+
+	std::cout << "a = {";
+	for (size_t i = 0; i < stdv_nums_a.size() - 1; i++)
+		std::cout << stdv_nums_a[i] << ", ";
+	std::cout << stdv_nums_a[stdv_nums_a.size() - 1];
+	std::cout << "}" << std::endl;
+	std::cout << "b = {";
+	for (size_t i = 0; i < stdv_nums_b.size() - 1; i++)
+		std::cout << stdv_nums_b[i] << ", ";
+	std::cout << stdv_nums_b[stdv_nums_b.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << std::endl << "swap(a, b);" << std::endl << std::endl;
+	swap(stdv_nums_a, stdv_nums_b);
+
+	std::cout << "a = {";
+	for (size_t i = 0; i < stdv_nums_a.size() - 1; i++)
+		std::cout << stdv_nums_a[i] << ", ";
+	std::cout << stdv_nums_a[stdv_nums_a.size() - 1];
+	std::cout << "}" << std::endl;
+	std::cout << "b = {";
+	for (size_t i = 0; i < stdv_nums_b.size() - 1; i++)
+		std::cout << stdv_nums_b[i] << ", ";
+	std::cout << stdv_nums_b[stdv_nums_b.size() - 1];
+	std::cout << "}" << std::endl;
+
+	std::cout << CYAN << BOLD << "---==------------------------------------==---" << RESET << std::endl << std::endl;
 }
 
 static void	clearscreen()
@@ -1084,19 +1962,19 @@ void	main_vector()
 				test_8();
 				break;
 			case 9:
-				std::cout << "You choose the test number 9" << std::endl;
+				test_9();
 				break;
 			case 10:
-				std::cout << "You choose the test number 10" << std::endl;
+				test_10();
 				break;
 			case 11:
-				std::cout << "You choose the test number 11" << std::endl;
+				test_11();
 				break;
 			case 12:
-				std::cout << "You choose the test number 12" << std::endl;
+				test_12();
 				break;
 			case 13:
-				std::cout << "You choose the test number 13" << std::endl;
+				test_13();
 				break;
 			case 42:
 				return;

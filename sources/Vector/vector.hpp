@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/03 15:35:48 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/04 01:22:34 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,19 +441,16 @@ template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
 	typename ft::vector<T>::const_iterator	it_lhs = lhs.begin();
-
 	typename ft::vector<T>::const_iterator	it_rhs = rhs.begin();
 
-	if (lhs == rhs)
+	if (lhs.size() != rhs.size())
 		return (false);
 	while (it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
 	{
 		it_lhs++;
 		it_rhs++;
 	}
-	if (it_rhs != rhs.end())
-		return (true);
-	return (false);
+	return (it_lhs == lhs.end() && it_rhs == rhs.end());
 };
 
 template <class T, class Alloc>
