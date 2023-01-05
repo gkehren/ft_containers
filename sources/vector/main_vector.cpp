@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/04 01:28:01 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/05 01:42:16 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -846,6 +846,7 @@ static void test_7()
 	std::cout << CYAN << "--------ITERATORS CONSTRUCTOR---------" << RESET << std::endl;
 	std::cout << CYAN << "---------FT----------" << RESET << std::endl;
 	std::cout << "ft::vector<int> v_it(v.begin(), v.end());" << std::endl;
+
 	ft::vector<int> v_it(v.begin(), v.end());
 
 	std::cout << "for (ft::vector<int>::iterator it = v_it.begin(); it != v_it.end(); it++)" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/04 01:22:34 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/05 01:45:43 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 #include <cstddef>
 #include <sstream>
 #include <limits>
-#include "../utils.hpp"
-#include "vector_iterator.hpp"
-#include "vector_const_iterator.hpp"
-#include "vector_reverse_iterator.hpp"
-#include "vector_const_reverse_iterator.hpp"
+#include "../utils/utils.hpp"
+#include "iterator.hpp"
+//#include "vector_iterator.hpp"
+//#include "vector_const_iterator.hpp"
+//#include "vector_reverse_iterator.hpp"
+//#include "vector_const_reverse_iterator.hpp"
 
 namespace ft
 {
@@ -29,19 +30,19 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef				T									value_type;
-			typedef				Allocator							allocator_type;
-			typedef	typename	Allocator::reference				reference;
-			typedef	typename	Allocator::const_reference			const_reference;
-			typedef	typename	Allocator::pointer					pointer;
-			typedef	typename	Allocator::const_pointer			const_pointer;
-			typedef typename	ft::vectoriterator<T>				iterator;
-			typedef typename	ft::vectorconstiterator<T>			const_iterator;
-			typedef typename	ft::vectorreverseiterator<T>		reverse_iterator;
-			typedef typename	ft::vectorconstreverseiterator<T>	const_reverse_iterator;
-			typedef	typename	std::ptrdiff_t						difference_type;
-			typedef	typename	std::size_t							size_type;
+			typedef				T							value_type;
+			typedef				Allocator					allocator_type;
+			typedef	typename	Allocator::reference		reference;
+			typedef	typename	Allocator::const_reference	const_reference;
+			typedef	typename	Allocator::pointer			pointer;
+			typedef	typename	Allocator::const_pointer	const_pointer;
+			typedef	typename	std::ptrdiff_t				difference_type;
+			typedef	typename	std::size_t					size_type;
 
+			typedef	ft::iterator<T*>						iterator;
+			typedef	ft::iterator<const T*>					const_iterator;
+			typedef	ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef	ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 			/*-----|-------------|-----*/
 			/*-----| Constructor |-----*/
 			/*-----|-------------|-----*/
@@ -66,7 +67,7 @@ namespace ft
 			// with each element constructed form its correspongind element in that range, in the same order.
 			template <class InputIterator>
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-			typename ft::enable_if<InputIterator::input_iterator, InputIterator>::type = NULL)
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type* = 0)
 			: _alloc(alloc), _data(0), _size(0), _capacity(0)
 			{
 				while (first != last)
@@ -237,8 +238,8 @@ namespace ft
 
 			// Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last,
-			typename ft::enable_if<InputIterator::input_iterator, InputIterator>::type = NULL)
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+			assign(InputIterator first, InputIterator last)
 			{
 				this->clear();
 				for (iterator it = first; it != last; it++)
