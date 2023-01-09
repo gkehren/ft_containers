@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:00:07 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/05 01:14:41 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/09 13:47:27 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,71 @@ namespace ft
 		a = b;
 		b = tmp;
 	}
+
+	template <class T1, class T2>
+	struct pair
+	{
+		T1 first;
+		T2 second;
+
+		pair() : first(), second() {};
+		pair(const T1 &x, const T2 &y) : first(x), second(y) {};
+
+		template < class U1, class U2 >
+		pair(const pair<U1,U2> &x) : first(x.first), second(x.second) {};
+
+		template< class V1, class V2 >
+		pair<V1,V2>	&operator=(const pair<V1,V2> &x)
+		{
+			if (this == &x)
+				return (*this);
+			first = x.first;
+			second = x.second;
+			return (*this);
+		}
+	};
+
+	template<class T1, class T2>
+	bool operator==(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return (x.first == y.first && x.second == y.second);
+	}
+
+	template<class T1, class T2>
+	bool operator!=(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return !(x == y);
+	}
+
+	template<class T1, class T2>
+	bool operator<(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return (x.first < y.first || (!(x.first < y.first) && x.second < y.second));
+	}
+
+	template<class T1, class T2>
+	bool operator>(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return (y < x);
+	}
+
+	template<class T1, class T2>
+	bool operator<=(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return !(y < x);
+	}
+
+	template<class T1, class T2>
+	bool operator>=(const pair<T1, T2> &x, const pair<T1, T2> &y)
+	{
+		return !(x < y);
+	}
+
+	template <class T1, class T2>
+	pair<T1,T2>	make_pair(T1 x, T2 y)
+	{
+		return (pair<T1,T2>(x, y));
+	};
 }
 
 
