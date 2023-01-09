@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:05:14 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/05 01:42:16 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:07:34 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -734,12 +734,12 @@ static void	test_6()
 	std::cout << CYAN << BOLD "---==------| REVERSE ITERATOR |------==---" << RESET << std::endl;
 
 	std::cout << CYAN << "--------------- FT ---------------" << RESET << std::endl;
-	std::cout << "For a vector : ";
 	v.push_back(1);
 	v.push_back(2);
 	v.push_back(3);
 	v.push_back(4);
 	v.push_back(5);
+	std::cout << "For a vector : ";
 	std::cout << "{";
 	for (size_t i = 0; i < v.size() - 1; i++)
 		std::cout << v[i] << ", ";

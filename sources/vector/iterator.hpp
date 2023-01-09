@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 01:16:15 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/05 01:58:00 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:07:13 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,39 +152,39 @@ namespace ft
 
 			reverse_iterator	operator++(int)	{
 				reverse_iterator tmp(*this);
-				iterator++; return tmp;
+				iterator--; return tmp;
 			}
 			reverse_iterator	operator--(int) {
 				reverse_iterator tmp(*this);
-				iterator--; return tmp;
+				iterator++; return tmp;
 			}
 			reverse_iterator	&operator++() {
-				iterator++;
+				iterator--;
 				return *this;
 			}
 			reverse_iterator	&operator--() {
-				iterator--;
+				iterator++;
 				return *this;
 			}
 
 			int		operator-(reverse_iterator const &obj) const {
-				return iterator - obj.iterator;
-			}
-			int		operator+(reverse_iterator const &obj) const {
 				return iterator + obj.iterator;
 			}
-			reverse_iterator	operator-(int n) const {
-				return reverse_iterator(this->iterator - n);
+			int		operator+(reverse_iterator const &obj) const {
+				return iterator - obj.iterator;
 			}
-			reverse_iterator	operator+(int n) const {
+			reverse_iterator	operator-(int n) const {
 				return reverse_iterator(this->iterator + n);
 			}
+			reverse_iterator	operator+(int n) const {
+				return reverse_iterator(this->iterator - n);
+			}
 			reverse_iterator	&operator-=(int n) {
-				this->iterator -= n;
+				this->iterator += n;
 				return (*this);
 			}
 			reverse_iterator	&operator+=(int n) {
-				this->iterator += n;
+				this->iterator -= n;
 				return (*this);
 			}
 			reference 	operator*() const {
