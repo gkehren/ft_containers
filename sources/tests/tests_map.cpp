@@ -1,66 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tests_map.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 14:50:00 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 15:18:06 by gkehren          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../ft_containers.hpp"
 #include "../map.hpp"
 #include <map>
-
-class time_test
-{
-	private:
-		std::clock_t _start;
-
-	public:
-		time_test() {
-			_start = 0;
-		}
-
-		time_test(const time_test &other) {
-			this->_start = other._start;
-		}
-
-		time_test &operator=(const time_test &rhs) {
-			this->_start = rhs._start;
-			return (*this);
-		}
-
-		~time_test() {}
-
-		void start() {
-			this->_start = std::clock();
-		}
-
-		std::clock_t stop() {
-			return (std::clock() - this->_start);
-		}
-};
-
-template <typename map_type>
-std::clock_t map_insert(size_t count, map_type map)
-{
-	time_test t;
-	t.start();
-
-	for (size_t i = 0; i < count; i++)
-	{
-		map[i] = true;
-		map.find(i);
-	}
-	{
-		map_type new_map(map);
-	}
-
-	return (t.stop());
-}
 
 template <typename Key, typename T>
 bool	check_iterator(std::map<Key, T> &st_map, ft::map<Key, T> &my_map){
@@ -576,32 +516,4 @@ int test_map( void ){
 	test_equal_range();
 	test_compare();
 	return (0);
-}
-
-void time_test_map(int n) {
-	if (n)
-		std::cout << MAGENTA << "\n\tTIME TEST:" << RESET << std::endl << std::endl;
-	if (!n)
-		std::cout << BLUE << "Map time" << RESET << std::endl;
-
-	std::clock_t std;
-	std::clock_t ft;
-
-	std::map<int, bool> sm1;
-	ft::map<int, bool> m1;
-
-	std = map_insert(200000, sm1);
-	std::cout << "Std: " << std << std::endl;
-
-	ft = map_insert(200000, m1);
-	std::cout << "Ft : " << ft << std::endl;
-
-	std::cout << "Our map is " << GREEN << (double)ft / (double)std << RESET << " times slower." << std::endl;
-
-	std::cout << "\nTime test:\t\t\t";
-	if (((double)ft / (double)std) < 20.0)
-		std::cout << SUCS << std::endl;
-	else
-		std::cout << FAIL << std::endl;
-	std::cout << std::endl;
 }

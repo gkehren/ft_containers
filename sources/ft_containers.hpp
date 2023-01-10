@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:05:48 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 14:56:32 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 00:06:20 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int		test_map();
 void	time_test_map(int n);
 int		test_vector();
 void	time_test_vector(int n);
+int		test_stack();
+void	time_test_stack(int n);
 
 #endif

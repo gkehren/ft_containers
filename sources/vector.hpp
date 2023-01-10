@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 15:17:32 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 00:18:05 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ namespace ft
 
 			// copy constructor
 			// Constructs a container with a copy of each of the elements in x, in the same order.
-			vector(vector& x) : _alloc(allocator_type()), _size(0), _capacity(0) { *this = x; };
+			vector(const vector& x) : _alloc(x._alloc), _size(0), _capacity(0) { this->operator=(x); };
 
 			// vector destructor
 			// Destroys the container object.
@@ -91,10 +91,12 @@ namespace ft
 
 			// Assign content
 			// Assins new contents to the container, replacing its current contents, and modifying its size accordingly.
-			vector&	operator=(vector& x)
+			vector&	operator=(const vector& x)
 			{
+				if (this == &x)
+					return (*this);
 				this->clear();
-				for (iterator it = x.begin(); it != x.end(); it++)
+				for (const_iterator it = x.begin(); it != x.end(); it++)
 					this->push_back(*it);
 				return (*this);
 			};
