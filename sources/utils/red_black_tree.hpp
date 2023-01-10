@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 22:07:52 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 00:57:12 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/10 13:50:51 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ namespace ft
 				if (_comp(node->_value, new_node->_value))
 				{
 					node->_right = _insert(node->_right, new_node, insert, pos);
-					node->_right_parent = node;
+					node->_right->_parent = node;
 				}
-				else if (_comp(node->_value, new_node->_value))
+				else if (_comp(new_node->_value, node->_value))
 				{
-					node->right = _insert(node->_right, new_node, insert, pos);
-					node->right->parent = node;
+					node->_left = _insert(node->_left, new_node, insert, pos);
+					node->_left->_parent = node;
 				}
 				else
 				{
@@ -200,8 +200,8 @@ namespace ft
 				tmp->_parent = node->_parent;
 				if (node->_parent != NULL)
 				{
-					if (node->_parent_left == node)
-						node->_parent_left = tmp;
+					if (node->_parent->_left == node)
+						node->_parent->_left = tmp;
 					else
 						node->_parent->_right = tmp;
 				}
@@ -235,7 +235,7 @@ namespace ft
 				node_ptr new_node = this->_construct_node(node->_value);
 				new_node->_left = _copy(node->_left);
 				if (new_node->_left != NULL)
-					new_node->_left->_parent - new_node;
+					new_node->_left->_parent = new_node;
 				new_node->_right = _copy(node->_right);
 				if (new_node->_right != NULL)
 					new_node->_right->_parent = new_node;
@@ -265,7 +265,7 @@ namespace ft
 				node_ptr repl_child = (repl->_left == NULL ? repl->_right : repl->_left);
 				node_ptr sibling = NULL;
 				if (repl_child != NULL)
-					repl_child->_parent - repl->_parent;
+					repl_child->_parent = repl->_parent;
 				if (is_left_child(repl))
 				{
 					repl->_parent->_left = repl_child;
@@ -286,7 +286,7 @@ namespace ft
 					if (is_left_child(node))
 						repl->_parent->_left = repl;
 					else
-						repl->_parent->_right - repl;
+						repl->_parent->_right = repl;
 					repl->_left = node->_left;
 					repl->_left->_parent = repl;
 					repl->_right = node->_right;
@@ -375,7 +375,7 @@ namespace ft
 							{
 								sibling->_right->flip_color();
 								sibling->flip_color();
-								this->_roate_left(sibling);
+								this->_rotate_left(sibling);
 								sibling = sibling->_parent;
 							}
 							sibling->_color = sibling->_parent->_color;
@@ -482,7 +482,7 @@ namespace ft
 			{
 				while (first != last)
 				{
-					this->inset(*first);
+					this->insert(*first);
 					++first;
 				}
 			};
@@ -561,7 +561,7 @@ namespace ft
 					else
 						return (iterator(node));
 				}
-				retunr (this->end());
+				return (this->end());
 			};
 
 			const_iterator	find(const value_type& val) const

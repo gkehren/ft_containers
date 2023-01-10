@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:30:24 by gkehren           #+#    #+#             */
-/*   Updated: 2022/12/30 15:35:31 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/10 14:51:23 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,8 @@
 #define BG_MAGENTA	"\033[45m"
 #define BG_CYAN		"\033[46m"
 #define BG_WHITE	"\033[47m"
+
+#define SUCS		"\033[1m\033[32mOK\033[0m"
+#define FAIL		"\033[1m\033[31mKO\033[0m"
 
 #endif

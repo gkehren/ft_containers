@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 00:58:48 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/10 15:17:32 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <cstddef>
 #include <sstream>
 #include <limits>
-#include "../utils/utils.hpp"
-#include "../utils/iterator.hpp"
+#include "utils/utils.hpp"
+#include "utils/iterator.hpp"
 
 namespace ft
 {
@@ -459,42 +459,24 @@ bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
-	typename ft::vector<T>::const_iterator	it_lhs = lhs.begin();
-	typename ft::vector<T>::const_iterator	it_rhs = rhs.begin();
-
-	if (lhs == rhs)
-		return (false);
-	while (it_lhs != lhs.end() && it_rhs != rhs.end() && *it_lhs == *it_rhs)
-	{
-		it_lhs++;
-		it_rhs++;
-	}
-	if (it_rhs != rhs.end())
-		return (true);
-	return (false);
+	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 };
 
 template <class T, class Alloc>
 bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
-	if (lhs == rhs)
-		return (true);
-	return (lhs < rhs);
+	return (!(rhs < lhs));
 };
 
 template <class T, class Alloc>
 bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
-	if (lhs == rhs)
-		return (false);
-	return (!(lhs < rhs));
+	return (rhs < lhs);
 };
 
 template <class T, class Alloc>
 bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 {
-	if (lhs == rhs)
-		return (true);
 	return (!(lhs < rhs));
 };
 

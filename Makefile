@@ -6,11 +6,11 @@
 #    By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:38:57 by gkehren           #+#    #+#              #
-#    Updated: 2023/01/04 20:11:45 by gkehren          ###   ########.fr        #
+#    Updated: 2023/01/10 14:53:51 by gkehren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES:=	main vector/main_vector
+FILES:=	main tests/tests_map tests/tests_vector
 NAME:= ft_containers
 
 # ------------------

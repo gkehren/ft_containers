@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 22:09:28 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/09 22:19:23 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/10 13:43:13 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ namespace ft
 		};
 
 
-		const_node_ptr	const_tre_min(const_node_ptr root) const
+		const_node_ptr	const_tree_min(const_node_ptr root) const
 		{
 			while (root->_left != NULL)
 				root = root->_left;
