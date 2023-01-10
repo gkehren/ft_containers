@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/05 13:07:52 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/10 00:58:48 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@
 #include <sstream>
 #include <limits>
 #include "../utils/utils.hpp"
-#include "iterator.hpp"
-//#include "vector_iterator.hpp"
-//#include "vector_const_iterator.hpp"
-//#include "vector_reverse_iterator.hpp"
-//#include "vector_const_reverse_iterator.hpp"
+#include "../utils/iterator.hpp"
 
 namespace ft
 {
