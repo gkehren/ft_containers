@@ -1,5 +1,5 @@
-#include "../ft_containers.hpp"
-#include "../stack.hpp"
+#include "tests.hpp"
+#include "../containers/stack.hpp"
 #include <stack>
 #include <vector>
 

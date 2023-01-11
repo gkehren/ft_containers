@@ -6,17 +6,17 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:53:43 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:32:14 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:44:54 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SET_HPP
 #define SET_HPP
 
-#include "utils/red_black_tree.hpp"
-#include "utils/tree_iterator.hpp"
-#include "utils/iterator.hpp"
-#include "utils/utils.hpp"
+#include "../utils/red_black_tree.hpp"
+#include "../utils/tree_iterator.hpp"
+#include "../utils/iterator.hpp"
+#include "../utils/utils.hpp"
 #include <functional>
 #include <memory>
 

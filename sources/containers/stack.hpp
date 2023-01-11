@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 23:45:47 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 23:55:03 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:23:50 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ namespace ft
 			typedef	size_t		size_type;
 			typedef	Container	container_type;
 
-		private:
+		protected:
 			container_type	_ctnr;
 
 		public:

@@ -1,8 +1,8 @@
-#include "../ft_containers.hpp"
-#include "../stack.hpp"
-#include "../vector.hpp"
-#include "../map.hpp"
-#include "../set.hpp"
+#include "tests.hpp"
+#include "../containers/stack.hpp"
+#include "../containers/vector.hpp"
+#include "../containers/map.hpp"
+#include "../containers/set.hpp"
 #include <stack>
 #include <map>
 #include <vector>

@@ -1,5 +1,5 @@
-#include "../ft_containers.hpp"
-#include "../map.hpp"
+#include "tests.hpp"
+#include "../containers/map.hpp"
 #include <map>
 
 template <typename Key, typename T>

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_containers.hpp                                  :+:      :+:    :+:   */
+/*   tests.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:05:48 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:20:17 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:52:45 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 #include <iostream>
 #include <ctime>
-#include "utils/ANSI_codes.hpp"
+#include "../utils/ANSI_codes.hpp"
 
-//void	main_vector();
 int		test_map();
 void	time_test_map(int n);
 int		test_vector();

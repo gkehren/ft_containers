@@ -1,5 +1,5 @@
-#include "../ft_containers.hpp"
-#include "../set.hpp"
+#include "tests.hpp"
+#include "../containers/set.hpp"
 #include <set>
 
 template <typename T>
