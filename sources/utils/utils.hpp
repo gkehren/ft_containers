@@ -6,12 +6,14 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:00:07 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/09 13:47:27 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:22:38 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 #define UTILS_HPP
+
+#include <limits>
 
 namespace ft
 {
@@ -110,6 +112,12 @@ namespace ft
 		}
 	};
 
+	template <class T1, class T2>
+	pair<T1,T2>	make_pair (T1 x, T2 y)
+	{
+		return (pair<T1,T2>(x,y));
+	};
+
 	template<class T1, class T2>
 	bool operator==(const pair<T1, T2> &x, const pair<T1, T2> &y)
 	{
@@ -145,12 +153,6 @@ namespace ft
 	{
 		return !(x < y);
 	}
-
-	template <class T1, class T2>
-	pair<T1,T2>	make_pair(T1 x, T2 y)
-	{
-		return (pair<T1,T2>(x, y));
-	};
 }
 
 

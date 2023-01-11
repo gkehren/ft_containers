@@ -2,9 +2,11 @@
 #include "../stack.hpp"
 #include "../vector.hpp"
 #include "../map.hpp"
+#include "../set.hpp"
 #include <stack>
 #include <map>
 #include <vector>
+#include <set>
 
 class time_test
 {
@@ -192,6 +194,35 @@ void time_test_map(int n) {
 	std::cout << "Std: " << std << std::endl;
 
 	ft = map_insert(200000, m1);
+	std::cout << "Ft : " << ft << std::endl;
+
+	std::cout << "Our map is " << GREEN << (double)ft / (double)std << RESET << " times slower." << std::endl;
+
+	std::cout << "\nTime test:\t\t\t";
+	if (((double)ft / (double)std) < 20.0)
+		std::cout << SUCS << std::endl;
+	else
+		std::cout << FAIL << std::endl;
+	std::cout << std::endl;
+}
+
+void	time_test_set(int n)
+{
+	if (n)
+		std::cout << MAGENTA << "\n\tTIME TEST:" << RESET << std::endl << std::endl;
+	if (!n)
+		std::cout << BLUE << "Set time" << RESET << std::endl;
+
+	std::clock_t std;
+	std::clock_t ft;
+
+	std::set<int> sm1;
+	ft::set<int> m1;
+
+	std = set_insert(200000, sm1);
+	std::cout << "Std: " << std << std::endl;
+
+	ft = set_insert(200000, m1);
 	std::cout << "Ft : " << ft << std::endl;
 
 	std::cout << "Our map is " << GREEN << (double)ft / (double)std << RESET << " times slower." << std::endl;

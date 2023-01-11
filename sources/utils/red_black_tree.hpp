@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 22:07:52 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/10 13:50:51 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:27:39 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,7 +442,7 @@ namespace ft
 			};
 
 			iterator	begin() { return (iterator(_begin_node)); };
-			const_iterator	begin() const { return (const_iterator(this->_begin_node)); };
+			const_iterator	begin() const { return (const_iterator(_begin_node)); };
 			iterator	end() { return (iterator(&_parent)); };
 			const_iterator	end() const { return (const_iterator(&_parent)); };
 			reverse_iterator	rbegin() { return (reverse_iterator(this->end())); };
