@@ -6,7 +6,7 @@
 #    By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:38:57 by gkehren           #+#    #+#              #
-#    Updated: 2023/01/11 15:53:20 by gkehren          ###   ########.fr        #
+#    Updated: 2023/01/14 23:20:42 by gkehren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCPATH:=sources/
 HDRPATH:=
 CCHPATH:=obj/
 IFLAGS:=-I ${HDRPATH}
-CFLAGS:=-Wall -Wextra -Werror -std=c++98
+CFLAGS:=-Wall -Wextra -Werror -std=c++98 -g3
 # ==================
 
 # ----- Colors -----

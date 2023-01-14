@@ -268,8 +268,8 @@ static void	test_operator(){
 
 static void test_reserve() {
 	std::cout << "Reserve test\t\t\t";
-	std::vector<int>st_vec(1);
-	ft::vector<int>my_vec(1);
+	std::vector<int>st_vec(10);
+	ft::vector<int>my_vec(10);
 	if (st_vec.capacity() != my_vec.capacity()){
 		std::cout << FAIL << std::endl;
 		return ;

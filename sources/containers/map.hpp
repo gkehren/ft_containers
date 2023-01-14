@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:16:10 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:44:44 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:16:23 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 namespace ft
 {
+	// Maps are associative containers that store elements formed by a combination of a key value and a mapped value,
+	// following a specific order.
 	template <class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
@@ -67,8 +69,14 @@ namespace ft
 			typedef typename	tree_type::reverse_iterator			reverse_iterator;
 			typedef typename	tree_type::const_reverse_iterator	const_reverse_iterator;
 
+			/*-----|-------------|-----*/
+			/*-----| Constructor |-----*/
+			/*-----|-------------|-----*/
+
+			// Constructs an empty container, with no elements.
 			explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _tree(value_compare(comp), alloc) {};
 
+			// Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding element in that range.
 			template <typename InputIterator>
 			map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0) : _tree(value_compare(comp), alloc)
@@ -76,9 +84,12 @@ namespace ft
 				this->insert(first, last);
 			};
 
+			// Constructs a container with a copy of each of the elements in x.
 			map(const map& other) : _tree(other._tree) {};
+
 			~map() {};
 
+			// Assigns new contents to the container, replacing its current content.
 			map& operator=(const map& rhs)
 			{
 				if (this != &rhs)
@@ -86,14 +97,43 @@ namespace ft
 				return (*this);
 			};
 
+			/*-----|-----------|-----*/
+			/*-----| Iterators |-----*/
+			/*-----|-----------|-----*/
+
+			// Return iterator to beginning
+			iterator				begin() { return(_tree.begin()); };
+			const_iterator			begin() const { return(_tree.begin()); };
+			// Return iterator to end
+			iterator				end() { return(_tree.end()); };
+			const_iterator			end() const { return(_tree.end()); };
+			// Return reverse iterator to reverse beginning
+			reverse_iterator		rbegin() { return(_tree.rbegin()); };
+			const_reverse_iterator	rbegin() const { return(_tree.rbegin()); };
+			// Return reverse iterator to reverse end
+			reverse_iterator		rend() { return(_tree.rend()); };
+			const_reverse_iterator	rend() const { return(_tree.rend()); };
+
+			/*-----|----------|-----*/
+			/*-----| Capacity |-----*/
+			/*-----|----------|-----*/
+
+			// Returns whether the map container is empty (i.e. whether its size is 0).
+			bool	empty() const { return(_tree.empty()); };
+
+			// Returns the number of elements in the map container.
+			size_type	size() const { return(_tree.size()); };
+
+			// Returns the maximum number of elements that the map container can hold.
+			size_type	max_size() const { return ((std::numeric_limits<size_type>::max() / sizeof(ft::RBnode<mapped_type>)) / 2); };
+
+			/*-----|----------------|-----*/
+			/*-----| Element access |-----*/
+			/*-----|----------------|-----*/
+
 			T& operator[](const Key& key)
 			{
 				return (insert(ft::make_pair(key, mapped_type())).first->second);
-			};
-
-			allocator_type	get_allocator() const
-			{
-				return (_tree.get_allocator());
 			};
 
 			T&	at(const Key& key)
@@ -112,24 +152,12 @@ namespace ft
 				return (tmp->second);
 			};
 
-			iterator				begin() { return(_tree.begin()); };
-			const_iterator			begin() const { return(_tree.begin()); };
-			iterator				end() { return (_tree.end()); };
-			const_iterator			end() const { return(_tree.end()); };
+			/*-----|-----------|-----*/
+			/*-----| Modifiers |-----*/
+			/*-----|-----------|-----*/
 
-			reverse_iterator		rbegin() { return(_tree.rbegin()); };
-			const_reverse_iterator	rbegin() const { return(_tree.rbegin()); };
-			reverse_iterator		rend() { return(_tree.rend()); };
-			const_reverse_iterator	rend() const { return(_tree.rend()); };
-
-			bool	empty() const { return(_tree.empty()); };
-
-			size_type	size() const { return(_tree.size()); };
-
-			size_type	max_size() const { return ((std::numeric_limits<size_type>::max() / sizeof(ft::RBnode<mapped_type>)) / 2); };
-
-			void	clear() { _tree.clear(); };
-
+			// Extends the container by inserting new elements,
+			// effectively increasing the container size by the number of elements inserted.
 			ft::pair<iterator, bool>	insert(const value_type& val) { return(_tree.insert(val)); };
 
 			iterator	insert(iterator position, const value_type& val) { return(_tree.insert(position, val)); };
@@ -141,17 +169,33 @@ namespace ft
 				_tree.insert(first, last);
 			};
 
+			// Removes from the map container either a single element or a range of elements ([first,last)).
 			void		erase(iterator pos) { _tree.erase(pos); };
 			void		erase(iterator first, iterator last) { _tree.erase(first, last); };
 			size_type	erase(const Key& key) { return(_tree.erase(ft::make_pair(key, mapped_type()))); };
 
+			// Exchanges the content of the container by the content of x, which is another map of the same type. Sizes may differ.
 			void	swap(map& other) { std::swap(_tree, other._tree); };
 
-			size_type	count(const Key& key) const
-			{
-				return(_tree.count(ft::make_pair(key, mapped_type())));
-			};
+			// Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
+			void	clear() { _tree.clear(); };
 
+			/*-----|-----------|-----*/
+			/*-----| Observers |-----*/
+			/*-----|-----------|-----*/
+
+			// Returns a copy of the comparison object used by the container to compare keys.
+			key_compare	key_comp() const { return(key_compare()); };
+
+			// Returns a comparison object that can be used to compare two elements to get whether the key of the first one goes before the second.
+			value_compare	value_comp() const { return(_tree.value_comp()); };
+
+			/*-----|------------|-----*/
+			/*-----| Operations |-----*/
+			/*-----|------------|-----*/
+
+			// Searches the container for an element with a key equivalent to k and returns an iterator to it if found,
+			// otherwise it returns an iterator to map::end.
 			iterator	find(const Key& key)
 			{
 				return (_tree.find(ft::make_pair(key, mapped_type())));
@@ -162,16 +206,13 @@ namespace ft
 				return (_tree.find(ft::make_pair(key, mapped_type())));
 			};
 
-			ft::pair<iterator,iterator>	equal_range(const Key& key)
+			// Searches the container for elements with a key equivalent to k and returns the number of matches.
+			size_type	count(const Key& key) const
 			{
-				return(_tree.equal_range(ft::make_pair(key, mapped_type())));
+				return(_tree.count(ft::make_pair(key, mapped_type())));
 			};
 
-			ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const
-			{
-				return(_tree.equal_range(ft::make_pair(key, mapped_type())));
-			};
-
+			// Returns an iterator pointing to the first element in the container whose key is not considered to go before k
 			iterator	lower_bound(const Key& key)
 			{
 				return(_tree.lower_bound(ft::make_pair(key, mapped_type())));
@@ -182,6 +223,7 @@ namespace ft
 				return(_tree.lower_bound(ft::make_pair(key, mapped_type())));
 			};
 
+			// Returns an iterator pointing to the first element in the container whose key is considered to go after k.
 			iterator	upper_bound(const Key& key)
 			{
 				return (this->_tree.upper_bound(ft::make_pair(key, mapped_type())));
@@ -192,9 +234,19 @@ namespace ft
 				return (this->_tree.upper_bound(ft::make_pair(key, mapped_type())));
 			};
 
-			key_compare	key_comp() const { return(key_compare()); };
+			// Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+			ft::pair<iterator,iterator>	equal_range(const Key& key)
+			{
+				return(_tree.equal_range(ft::make_pair(key, mapped_type())));
+			};
 
-			value_compare	value_comp() const { return(_tree.value_comp()); };
+			ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const
+			{
+				return(_tree.equal_range(ft::make_pair(key, mapped_type())));
+			};
+
+			// Returns a copy of the allocator object associated with the map.
+			allocator_type	get_allocator() const { return (_tree.get_allocator()); };
 	};
 
 	template	<typename Key, typename T, typename Compare, typename Alloc>

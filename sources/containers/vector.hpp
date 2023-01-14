@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 13:04:29 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:45:05 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:54:32 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,14 @@ namespace ft
 				if (this == &x)
 					return (*this);
 				this->clear();
+				this->_data = x._data;
 				for (const_iterator it = x.begin(); it != x.end(); it++)
 					this->push_back(*it);
 				return (*this);
 			};
+
+			// Returns a copy of the allocator object associated with the vector.
+			allocator_type	get_allocator() const { return(_alloc); };
 
 			/*-----|-----------|-----*/
 			/*-----| Iterators |-----*/

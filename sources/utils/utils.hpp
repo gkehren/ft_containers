@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:00:07 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:22:38 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/14 21:30:12 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 namespace ft
 {
-	template<bool, typename T = void>
+	// The type T is enabled as member type enable_if::type if Cond is true.
+	template<bool Cond, typename T = void>
 	struct enable_if {};
 
-	template<typename T>
+	template<class T>
 	struct enable_if<true, T> { typedef T type; };
 
 	template<class T, T v>
@@ -30,9 +31,12 @@ namespace ft
 		operator T() const { return value; }
 	};
 
+	// Trait class that identifies whether T is an integral type.
 	template<class T>
 	struct is_integral: is_integral_res<bool, std::numeric_limits<T>::is_integer> {};
 
+
+	// Returns true if the range [first1,last1) compares lexicographically less than the range [first2,last2).
 	template<class InputIt1, class InputIt2>
 	bool lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
 	{
@@ -59,6 +63,8 @@ namespace ft
 		return (first1 == last1) && (first2 != last2);
 	}
 
+	// Compares the elements in the range [first1,last1) with those in the range beginning at first2,
+	// and returns true if all of the elements in both ranges match.
 	template<class InputIt1, class InputIt2>
 	bool equal(InputIt1 first1, InputIt1 last1, InputIt2 first2)
 	{
@@ -89,6 +95,8 @@ namespace ft
 		b = tmp;
 	}
 
+	// This class couples together a pair of values, which may be of different types (T1 and T2).
+	// The individual values can be accessed through its public members first and second.
 	template <class T1, class T2>
 	struct pair
 	{
@@ -112,8 +120,9 @@ namespace ft
 		}
 	};
 
+	// Constructs a pair object with its first element set to x and its second element set to y.
 	template <class T1, class T2>
-	pair<T1,T2>	make_pair (T1 x, T2 y)
+	pair<T1,T2>	make_pair(T1 x, T2 y)
 	{
 		return (pair<T1,T2>(x,y));
 	};

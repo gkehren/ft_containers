@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:53:43 by gkehren           #+#    #+#             */
-/*   Updated: 2023/01/11 15:44:54 by gkehren          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:08:50 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 namespace ft
 {
+	// Sets are containers that store unique elements following a specific order.
 	template <class T, class Compare = std::less<T>, class Alloc = std::allocator<T> >
 	class set
 	{
@@ -31,7 +32,7 @@ namespace ft
 			typedef	Alloc											allocator_type;
 		private:
 			typedef	ft::rbTree<T,Compare,Alloc>						tree_type;
-			tree_type	_tree;
+			tree_type	_set;
 
 		public:
 			typedef typename tree_type::value_type					value_type;
@@ -48,90 +49,129 @@ namespace ft
 			typedef typename tree_type::const_reverse_iterator		const_reverse_iterator;
 			typedef value_type										Key;
 
+			/*-----|-------------|-----*/
+			/*-----| Constructor |-----*/
+			/*-----|-------------|-----*/
 			explicit set(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
-			_tree(comp, alloc) {};
+			_set(comp, alloc) {};
 
 			template <typename InputIterator>
 			set(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
-			_tree(comp, alloc) { this->insert(first, last); };
+			_set(comp, alloc) { this->insert(first, last); };
 
-			set(const set& other) : _tree(other._tree) {};
+			set(const set& other) : _set(other._set) {};
 			~set() {};
 
 			set&	operator=(const set& rhs)
 			{
 				if (this != &rhs)
-					this->_tree = rhs._tree;
+					this->_set = rhs._set;
 				return (*this);
 			};
 
-			allocator_type	get_allocator() const { return(_tree.get_allocator()); };
+			/*-----|-----------|-----*/
+			/*-----| Iterators |-----*/
+			/*-----|-----------|-----*/
 
-			iterator begin() { return(_tree.begin()); };
-			const_iterator	begin() const { return(_tree.begin()); };
-			iterator end() { return(_tree.end()); };
-			const_iterator	end() const { return(_tree.end()); };
-			reverse_iterator rbegin() { return(_tree.rbegin()); };
-			const_reverse_iterator	rbegin() const { return(_tree.rbegin()); };
-			reverse_iterator rend() { return(_tree.rend()); };
-			const_reverse_iterator	rend() const { return(_tree.rend()); };
+			// Return iterator to beginning
+			iterator				begin() { return(_set.begin()); };
+			const_iterator			begin() const { return(_set.begin()); };
+			// Return iterator to end
+			iterator				end() { return(_set.end()); };
+			const_iterator			end() const { return(_set.end()); };
+			// Return reverse iterator to reverse beginning
+			reverse_iterator		rbegin() { return(_set.rbegin()); };
+			const_reverse_iterator	rbegin() const { return(_set.rbegin()); };
+			// Return reverse iterator to reverse end
+			reverse_iterator		rend() { return(_set.rend()); };
+			const_reverse_iterator	rend() const { return(_set.rend()); };
 
-			bool	empty() const { return(_tree.empty()); };
+			/*-----|----------|-----*/
+			/*-----| Capacity |-----*/
+			/*-----|----------|-----*/
 
-			size_type	size() const { return(_tree.size()); };
+			// Returns whether the set container is empty (i.e. whether its size is 0).
+			bool	empty() const { return(_set.empty()); };
 
+			// Returns the number of elements in the set container.
+			size_type	size() const { return(_set.size()); };
+
+			// Returns the maximum number of elements that the set container can hold.
 			size_type	max_size() const
 			{
 				return ((std::numeric_limits<size_type>::max() / sizeof(ft::RBnode<key_type>)) / 2);
 			};
 
-			void	clear() { _tree.clear(); };
+			/*-----|-----------|-----*/
+			/*-----| Modifiers |-----*/
+			/*-----|-----------|-----*/
 
-			ft::pair<iterator,bool>	insert(const value_type& val) { return(_tree.insert(val)); };
+			// Extends the container by inserting new elements,
+			// effectively increasing the container size by the number of elements inserted.
+			ft::pair<iterator,bool>	insert(const value_type& val) { return(_set.insert(val)); };
 
 			iterator	insert(iterator hint, const value_type& val)
 			{
 				(void)hint;
-				return (_tree.insert(val).first);
+				return (_set.insert(val).first);
 			};
 
 			template <class InputIterator>
-			void	insert(InputIterator first, InputIterator last) { _tree.insert(first, last); };
+			void	insert(InputIterator first, InputIterator last) { _set.insert(first, last); };
 
-			void	erase(iterator pos) { _tree.erase(*pos); };
+			// Removes from the set container either a single element or a range of elements ([first,last)).
+			void	erase(iterator pos) { _set.erase(*pos); };
 
 			void	erase(iterator first, iterator last)
 			{
 				while (first != last)
-					_tree.erase(*(first++));
+					_set.erase(*(first++));
 			};
 
-			size_type	erase(const Key& key) { return(_tree.erase(key)); };
+			size_type	erase(const Key& key) { return(_set.erase(key)); };
 
-			void	swap(set& other) { std::swap(_tree, other._tree); };
+			// Exchanges the content of the container by the content of x, which is another set of the same type. Sizes may differ.
+			void	swap(set& other) { std::swap(_set, other._set); };
 
-			size_type	count(const Key& key) const { return(_tree.count(key)); };
+			// Removes all elements from the set container (which are destroyed), leaving the container with a size of 0.
+			void	clear() { _set.clear(); };
 
-			iterator	find(const Key& key) { return(_tree.find(key)); };
+			/*-----|-----------|-----*/
+			/*-----| Observers |-----*/
+			/*-----|-----------|-----*/
 
-			const_iterator	find(const Key& key) const { return(_tree.find(key)); };
-
-			ft::pair<iterator,iterator>	equal_range(const Key& key) { return(_tree.equal_range(key)); };
-
-			ft::pair<const_iterator,const_iterator>	equal_range(const Key& key) const { return(_tree.equal_range(key)); };
-
-			iterator	lower_bound(const Key& key) { return(_tree.lower_bound(key)); };
-
-			const_iterator	lower_bound(const Key& key) const { return(_tree.lower_bound(key)); };
-
-			iterator	upper_bound(const Key& key) { return(_tree.upper_bound(key)); };
-
-			const_iterator	upper_bound(const Key& key) const { return(_tree.upper_bound(key)); };
-
+			// Returns a copy of the comparison object used by the container.
 			key_compare	key_comp() const { return(key_compare()); };
 
-			value_compare	value_comp() const { return(_tree.value_comp()); };
+			// Returns a copy of the comparison object used by the container.
+			value_compare	value_comp() const { return(_set.value_comp()); };
 
+			/*-----|------------|-----*/
+			/*-----| Operations |-----*/
+			/*-----|------------|-----*/
+
+			// Searches the container for an element equivalent to val and returns an iterator to it if found,
+			// otherwise it returns an iterator to set::end.
+			iterator	find(const Key& key) { return(_set.find(key)); };
+			const_iterator	find(const Key& key) const { return(_set.find(key)); };
+
+			// Searches the container for elements equivalent to val and returns the number of matches.
+			size_type	count(const Key& key) const { return(_set.count(key)); };
+
+			// Returns an iterator pointing to the first element in the container which is not considered to go before val (i.e., either it is equivalent or goes after).
+			iterator	lower_bound(const Key& key) { return(_set.lower_bound(key)); };
+			const_iterator	lower_bound(const Key& key) const { return(_set.lower_bound(key)); };
+
+			// Returns an iterator pointing to the first element in the container which is considered to go after val.
+			iterator	upper_bound(const Key& key) { return(_set.upper_bound(key)); };
+			const_iterator	upper_bound(const Key& key) const { return(_set.upper_bound(key)); };
+
+			// Returns the bounds of a range that includes all the elements in the container that are equivalent to val.
+			ft::pair<const_iterator,const_iterator>	equal_range(const Key& key) const { return(_set.equal_range(key)); };
+			ft::pair<iterator,iterator>	equal_range(const Key& key) { return(_set.equal_range(key)); };
+
+			// Returns a copy of the allocator object associated with the set.
+			allocator_type	get_allocator() const { return(_set.get_allocator()); };
 	};
 
 template< class Key, class Compare, class Alloc >
