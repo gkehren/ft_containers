@@ -52,8 +52,12 @@ std::clock_t vector_insert(size_t count, vector_type vector)
 		tmp = vector[i];
 	}
 	vector_type new_vec(vector);
+	for (size_t i = 0; i < count; i++)
+	{
+		vector.pop_back();
+		tmp = vector[i];
+	}
 	(void)tmp;
-	vector.erase(vector.begin(), vector.end());
 	return (t.stop());
 }
 
